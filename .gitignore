@@ -8,3 +8,4 @@ __pycache__/
 *.toc
 report/results/
 !results/blind_runs.log
+.venv/

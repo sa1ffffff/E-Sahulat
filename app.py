@@ -11,6 +11,8 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
+import llm
+
 NOTEBOOK = Path(os.environ.get("ESAHULAT_NOTEBOOK", "E_Sahulat_AI_Hackathon.ipynb"))
 METRICS = Path("esahulat/outputs/app_metrics.json")
 SERIES = ["#2a78d6", "#eb6834", "#1baf7a"]          # categorical slots 1-3, validated as a set
@@ -49,11 +51,30 @@ def rtl(text):
     return f"<div class='rtl'>{text}</div>"
 
 
-def show_response(resp, verified, issues, ns):
+def llm_answer(query, resp):
+    with st.container(border=True):
+        st.caption(f"Plain-language answer from the local LLM ({llm.MODEL}), written only from the quotes below.")
+        try:
+            if resp["lang"] == "ur":
+                text = "".join(llm.stream_answer(query, resp))
+                st.markdown(rtl(text), unsafe_allow_html=True)
+            else:
+                text = st.write_stream(llm.stream_answer(query, resp))
+        except Exception as exc:
+            st.caption(f"Local LLM failed ({exc}). The verified quotes below are unaffected.")
+            return
+        extra = llm.unsupported_numbers(text, resp)
+        if extra:
+            st.warning(f"The LLM wrote numbers that aren't in the quotes ({', '.join(map(str, extra))}). Trust the quotes below.")
+
+
+def show_response(resp, verified, issues, ns, query=None, use_llm=False):
     color, label = DECISION_STYLE[resp["decision"]]
     st.markdown(f"<span class='badge' style='background:{color}'>{label}</span><span class='reason'>{resp['reason']}</span>",
                 unsafe_allow_html=True)
     st.markdown(rtl(resp["message"]) if resp["lang"] == "ur" else resp["message"], unsafe_allow_html=True)
+    if use_llm and resp["decision"] == "answer" and verified:
+        llm_answer(query, resp)
     for ev in resp["evidence"]:
         with st.container(border=True):
             if ev["role"] == "context":
@@ -78,7 +99,7 @@ def show_response(resp, verified, issues, ns):
                      hide_index=True, use_container_width=True)
 
 
-def ask_page(ns, lang):
+def ask_page(ns, lang, use_llm):
     st.subheader("Ask a passport question")
     st.caption("English, Urdu or Roman Urdu. Answers quote official DGI&P text; anything the sources don't cover gets an honest \"can't verify\".")
     cols = st.columns(3)
@@ -88,7 +109,7 @@ def ask_page(ns, lang):
     query = st.text_area("Your question", key="query", height=90)
     if st.button("Ask", type="primary") and query.strip():
         resp = ns["respond"](query.strip(), lang=lang)
-        show_response(resp, *ns["verify_response"](resp), ns)
+        show_response(resp, *ns["verify_response"](resp), ns, query=query.strip(), use_llm=use_llm)
 
 
 def kb_page(ns):
@@ -231,11 +252,14 @@ with st.sidebar:
     st.caption("Evidence-grounded passport help in English, اردو and Roman Urdu.")
     mode = st.radio("Mode", ["Ask", "Knowledge base", "Evaluation"])
     lang = LANGUAGES[st.selectbox("Response language", list(LANGUAGES))]
+    llm_ready = llm.available()
+    use_llm = st.toggle(f"Local LLM answer ({llm.MODEL})", value=llm_ready, disabled=not llm_ready,
+                        help=None if llm_ready else f"Start Ollama and run: ollama pull {llm.MODEL}")
     st.divider()
     st.caption(f"Retriever: {ns['FINAL_METHOD']}\n\nDense model: {ns['ENC'].name}\n\nNo external APIs; models run locally.")
 
 if mode == "Ask":
-    ask_page(ns, lang)
+    ask_page(ns, lang, use_llm)
 elif mode == "Knowledge base":
     kb_page(ns)
 else:
