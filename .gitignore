@@ -1,0 +1,10 @@
+esahulat/
+kb_review.csv
+__pycache__/
+.ipynb_checkpoints/
+*.aux
+*.log
+*.out
+*.toc
+report/results/
+!results/blind_runs.log

@@ -1,0 +1,451 @@
+{
+ "version": "841339e5e722",
+ "dense_backend": "stub",
+ "dense_model": "char-ngram-LSA (stand-in)",
+ "retriever": "BM25-norm+lex",
+ "thresholds": {
+  "dense": 0.6003,
+  "cov": 0.0,
+  "ood": 0.6422,
+  "unknown": 1
+ },
+ "rerank_lambda": {
+  "BM25-norm+lex+bi+rerank": 0.1,
+  "Hybrid+lex+rerank": 0.0
+ },
+ "retrieval": {
+  "dev": [
+   {
+    "method": "BM25-raw",
+    "n": 107,
+    "Recall@5": 0.5700934579439252,
+    "MRR@5": 0.4783489096573209,
+    "Hit@1": 0.4205607476635514
+   },
+   {
+    "method": "CharNgram-TFIDF",
+    "n": 107,
+    "Recall@5": 0.5700934579439252,
+    "MRR@5": 0.49610591900311524,
+    "Hit@1": 0.4392523364485981
+   },
+   {
+    "method": "BM25-norm+lex",
+    "n": 107,
+    "Recall@5": 1.0,
+    "MRR@5": 1.0,
+    "Hit@1": 1.0
+   },
+   {
+    "method": "BM25-norm+lex+bi",
+    "n": 107,
+    "Recall@5": 1.0,
+    "MRR@5": 0.985981308411215,
+    "Hit@1": 0.9719626168224299
+   },
+   {
+    "method": "Dense",
+    "n": 107,
+    "Recall@5": 0.8598130841121495,
+    "MRR@5": 0.7345794392523365,
+    "Hit@1": 0.6448598130841121
+   },
+   {
+    "method": "Dense-bi",
+    "n": 107,
+    "Recall@5": 0.8598130841121495,
+    "MRR@5": 0.7213395638629284,
+    "Hit@1": 0.616822429906542
+   },
+   {
+    "method": "Dense-bi+lex",
+    "n": 107,
+    "Recall@5": 0.9626168224299065,
+    "MRR@5": 0.9049844236760124,
+    "Hit@1": 0.8598130841121495
+   },
+   {
+    "method": "Hybrid",
+    "n": 107,
+    "Recall@5": 0.9065420560747663,
+    "MRR@5": 0.8489096573208723,
+    "Hit@1": 0.8130841121495327
+   },
+   {
+    "method": "Hybrid+lex",
+    "n": 107,
+    "Recall@5": 1.0,
+    "MRR@5": 0.9582554517133957,
+    "Hit@1": 0.9345794392523364
+   },
+   {
+    "method": "BM25-norm+lex+bi+rerank",
+    "n": 107,
+    "Recall@5": 1.0,
+    "MRR@5": 1.0,
+    "Hit@1": 1.0
+   },
+   {
+    "method": "Hybrid+lex+rerank",
+    "n": 107,
+    "Recall@5": 1.0,
+    "MRR@5": 0.9582554517133957,
+    "Hit@1": 0.9345794392523364
+   }
+  ],
+  "test": [
+   {
+    "method": "BM25-raw",
+    "n": 40,
+    "Recall@5": 0.875,
+    "MRR@5": 0.7687499999999999,
+    "Hit@1": 0.7
+   },
+   {
+    "method": "CharNgram-TFIDF",
+    "n": 40,
+    "Recall@5": 0.85,
+    "MRR@5": 0.76125,
+    "Hit@1": 0.725
+   },
+   {
+    "method": "BM25-norm+lex",
+    "n": 40,
+    "Recall@5": 1.0,
+    "MRR@5": 0.9583333333333333,
+    "Hit@1": 0.925
+   },
+   {
+    "method": "BM25-norm+lex+bi",
+    "n": 40,
+    "Recall@5": 1.0,
+    "MRR@5": 0.9708333333333334,
+    "Hit@1": 0.95
+   },
+   {
+    "method": "Dense",
+    "n": 40,
+    "Recall@5": 0.9,
+    "MRR@5": 0.8229166666666666,
+    "Hit@1": 0.775
+   },
+   {
+    "method": "Dense-bi",
+    "n": 40,
+    "Recall@5": 0.9,
+    "MRR@5": 0.8020833333333333,
+    "Hit@1": 0.725
+   },
+   {
+    "method": "Dense-bi+lex",
+    "n": 40,
+    "Recall@5": 0.975,
+    "MRR@5": 0.9125,
+    "Hit@1": 0.875
+   },
+   {
+    "method": "Hybrid",
+    "n": 40,
+    "Recall@5": 0.975,
+    "MRR@5": 0.9,
+    "Hit@1": 0.85
+   },
+   {
+    "method": "Hybrid+lex",
+    "n": 40,
+    "Recall@5": 1.0,
+    "MRR@5": 0.93125,
+    "Hit@1": 0.875
+   },
+   {
+    "method": "BM25-norm+lex+bi+rerank",
+    "n": 40,
+    "Recall@5": 1.0,
+    "MRR@5": 0.9708333333333334,
+    "Hit@1": 0.95
+   },
+   {
+    "method": "Hybrid+lex+rerank",
+    "n": 40,
+    "Recall@5": 1.0,
+    "MRR@5": 0.93125,
+    "Hit@1": 0.875
+   }
+  ]
+ },
+ "retrieval_test_by_language": {
+  "hard_case / en": 1.0,
+  "hard_case / roman_ur": 1.0,
+  "hard_case / ur": 1.0,
+  "spelling_variant / roman_ur": 1.0
+ },
+ "decisions": {
+  "TEST (previously inspected)": {
+   "n": 60.0,
+   "decision accuracy": 1.0,
+   "answer precision": 1.0,
+   "answer recall (answerable answered)": 1.0,
+   "answer F1": 1.0,
+   "false-answer rate on unanswerable": 0.0,
+   "clarify accuracy (ambiguous)": 1.0,
+   "n answerable": 39.0,
+   "n unanswerable/ambiguous": 21.0
+  },
+  "BRIEF": {
+   "n": 12.0,
+   "decision accuracy": 1.0,
+   "answer precision": 1.0,
+   "answer recall (answerable answered)": 1.0,
+   "answer F1": 1.0,
+   "false-answer rate on unanswerable": 0.0,
+   "clarify accuracy (ambiguous)": NaN,
+   "n answerable": 8.0,
+   "n unanswerable/ambiguous": 4.0
+  },
+  "DEV": {
+   "n": 139.0,
+   "decision accuracy": 0.9640287769784173,
+   "answer precision": 0.9722222222222222,
+   "answer recall (answerable answered)": 0.9813084112149533,
+   "answer F1": 0.9767441860465117,
+   "false-answer rate on unanswerable": 0.09375,
+   "clarify accuracy (ambiguous)": 1.0,
+   "n answerable": 107.0,
+   "n unanswerable/ambiguous": 32.0
+  }
+ },
+ "citations": {
+  "TEST (previously inspected)": {
+   "n answered": 39.0,
+   "verifier pass rate (quote/URL/numbers)": 1.0,
+   "cited passage = gold (answered w/ gold)": 0.9230769230769231,
+   "CITATION SUPPORT RATE": 0.9230769230769231,
+   "n answered w/ gold": 39.0,
+   "mean answer token-F1 vs expected_answer_en": 0.6154231198415689
+  },
+  "BRIEF": {
+   "n answered": 8.0,
+   "verifier pass rate (quote/URL/numbers)": 1.0,
+   "cited passage = gold (answered w/ gold)": 0.875,
+   "CITATION SUPPORT RATE": 0.875,
+   "n answered w/ gold": 8.0,
+   "mean answer token-F1 vs expected_answer_en": NaN
+  },
+  "DEV": {
+   "n answered": 108.0,
+   "verifier pass rate (quote/URL/numbers)": 1.0,
+   "cited passage = gold (answered w/ gold)": 1.0,
+   "CITATION SUPPORT RATE": 1.0,
+   "n answered w/ gold": 105.0,
+   "mean answer token-F1 vs expected_answer_en": 0.6465022647101574
+  }
+ },
+ "cross_script": {
+  "intents": 30.0,
+  "dev: same top-1 in en/ur/roman": 1.0,
+  "dev: all 3 scripts hit@5": 1.0,
+  "dev: mean pairwise Jaccard@5": 0.6952380952380952,
+  "test SV(noisy roman) top-1 = dev EN top-1": 0.9333333333333333
+ },
+ "confusion_test": {
+  "rows": [
+   "abstain",
+   "answer",
+   "clarify",
+   "no_answer",
+   "All"
+  ],
+  "cols": [
+   "abstain",
+   "answer",
+   "clarify",
+   "All"
+  ],
+  "values": [
+   [
+    17,
+    0,
+    0,
+    17
+   ],
+   [
+    0,
+    39,
+    0,
+    39
+   ],
+   [
+    0,
+    0,
+    3,
+    3
+   ],
+   [
+    1,
+    0,
+    0,
+    1
+   ],
+   [
+    18,
+    39,
+    3,
+    60
+   ]
+  ]
+ },
+ "latency_test_ms": [
+  2.28,
+  2.9,
+  2.02,
+  3.95,
+  5.8,
+  4.17,
+  5.32,
+  4.44,
+  3.63,
+  6.79,
+  7.84,
+  6.66,
+  5.57,
+  8.01,
+  6.61,
+  5.08,
+  9.7,
+  6.47,
+  8.85,
+  7.85,
+  5.59,
+  3.29,
+  8.06,
+  7.51,
+  7.53,
+  4.85,
+  4.75,
+  7.22,
+  10.71,
+  4.61,
+  3.82,
+  5.9,
+  4.35,
+  5.58,
+  5.58,
+  4.97,
+  4.92,
+  5.47,
+  4.99,
+  5.48,
+  5.17,
+  8.2,
+  4.48,
+  4.22,
+  4.91,
+  4.6,
+  4.88,
+  5.08,
+  5.09,
+  5.45,
+  5.85,
+  6.8,
+  4.71,
+  8.89,
+  4.4,
+  5.56,
+  7.07,
+  7.98,
+  5.96,
+  6.73
+ ],
+ "blind": {
+  "decision accuracy": 0.723,
+  "answer recall (answerable answered)": 0.848,
+  "false-answer rate on unanswerable": 0.571,
+  "clarify accuracy": 0.5,
+  "retrieval Recall@5": 0.848,
+  "retrieval MRR@5": 0.672,
+  "citation: verifier pass (answered)": 1.0,
+  "citation: cited passage is gold (answered w/ gold)": 0.607,
+  "CITATION SUPPORT (verifier pass and gold)": 0.607,
+  "cross-language: same decision": 0.667,
+  "cross-language: same decision and citation": 0.5,
+  "cross-language: all variants correct": 0.667
+ },
+ "blind_n": {
+  "decision accuracy": 47,
+  "answer recall (answerable answered)": 33,
+  "false-answer rate on unanswerable": 14,
+  "clarify accuracy": 4,
+  "retrieval Recall@5": 33,
+  "retrieval MRR@5": 33,
+  "citation: verifier pass (answered)": 36,
+  "citation: cited passage is gold (answered w/ gold)": 28,
+  "CITATION SUPPORT (verifier pass and gold)": 28,
+  "cross-language: same decision": 6,
+  "cross-language: same decision and citation": 6,
+  "cross-language: all variants correct": 6,
+  "latency p50 / p95 ms": 47
+ },
+ "latency_blind_ms": [
+  9.09,
+  7.11,
+  8.96,
+  7.6,
+  5.84,
+  7.33,
+  6.92,
+  7.24,
+  9.27,
+  6.2,
+  5.01,
+  4.94,
+  6.86,
+  4.9,
+  6.07,
+  6.22,
+  6.07,
+  6.93,
+  4.7,
+  8.05,
+  5.62,
+  6.18,
+  5.79,
+  6.04,
+  5.02,
+  5.46,
+  4.06,
+  7.31,
+  7.11,
+  4.15,
+  4.83,
+  3.5,
+  6.59,
+  6.58,
+  4.51,
+  3.97,
+  5.44,
+  3.96,
+  5.03,
+  4.32,
+  4.3,
+  2.05,
+  6.67,
+  5.6,
+  4.0,
+  3.53,
+  3.48
+ ],
+ "blind_baseline": {
+  "decision accuracy": 0.766,
+  "answer recall (answerable answered)": 0.909,
+  "false-answer rate on unanswerable": 0.571,
+  "clarify accuracy": 0.5,
+  "retrieval Recall@5": 0.939,
+  "retrieval MRR@5": 0.677,
+  "citation: verifier pass (answered)": 1.0,
+  "citation: cited passage is gold (answered w/ gold)": 0.533,
+  "CITATION SUPPORT (verifier pass and gold)": 0.533,
+  "cross-language: same decision": 0.833,
+  "cross-language: same decision and citation": 0.5,
+  "cross-language: all variants correct": 0.833
+ }
+}

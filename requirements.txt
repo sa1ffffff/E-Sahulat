@@ -1,0 +1,10 @@
+numpy
+pandas
+scikit-learn
+matplotlib
+python-docx
+beautifulsoup4
+requests
+sentence-transformers
+streamlit==1.39.0
+plotly==5.24.1

@@ -1,0 +1,14 @@
+metric,value [95% CI],n
+decision accuracy,"0.723 [0.60, 0.85]",47
+answer recall (answerable answered),"0.848 [0.70, 0.94]",33
+false-answer rate on unanswerable,"0.571 [0.36, 0.79]",14
+clarify accuracy,"0.500 [0.00, 1.00]",4
+retrieval Recall@5,"0.848 [0.73, 0.97]",33
+retrieval MRR@5,"0.672 [0.55, 0.80]",33
+citation: verifier pass (answered),"1.000 [1.00, 1.00]",36
+citation: cited passage is gold (answered w/ gold),"0.607 [0.43, 0.79]",28
+CITATION SUPPORT (verifier pass and gold),"0.607 [0.43, 0.79]",28
+cross-language: same decision,0.667,6
+cross-language: same decision and citation,0.500,6
+cross-language: all variants correct,0.667,6
+latency p50 / p95 ms,5.8 / 8.7,47

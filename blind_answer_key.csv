@@ -1,0 +1,48 @@
+qid,group,answerable,expected_decision,expected_intent,expected_topic,gold_evidence_ids,expected_behavior,notes
+B01,dual,True,answer,F04,dual_nationality,F04,Quote dual-national requirement,
+B02,dual,True,answer,F04,dual_nationality,F04,Quote dual-national requirement,
+B03,dual,True,answer,F04,dual_nationality,F04,Quote dual-national requirement,
+B04,deceased,True,answer,F10,minor_deceased_parent,F10,Quote death-certificate requirement,F08 is a confusable sibling
+B05,deceased,True,answer,F10,minor_deceased_parent,F10,Quote death-certificate requirement,
+B06,deceased,True,answer,F10,minor_deceased_parent,F10,Quote death-certificate requirement,
+B07,early_renew,True,answer,F16,renew_before_expiry,F16;F18,Quote no-restriction rule; online category needs <=1 year,renewal vs online-renewal eligibility
+B08,early_renew,True,answer,F16,renew_before_expiry,F16;F18,Quote no-restriction rule,
+B09,early_renew,True,answer,F16,renew_before_expiry,F16;F18,Quote no-restriction rule,
+B10,interview,True,answer,F23,application_process_interview,F23,Quote verification and interview step,
+B11,interview,True,answer,F23,application_process_interview,F23,Quote verification and interview step,
+B12,interview,True,answer,F23,application_process_interview,F23,Quote verification and interview step,
+B13,stolen,True,answer,F05,lost_passport,F05,Quote police-report requirement,
+B14,stolen,True,answer,F05,lost_passport,F05,Quote police-report requirement,
+B15,stolen,True,answer,F05,lost_passport,F05,Quote police-report requirement,
+B16,pages,True,answer,F28,exhausted_pages,F28,Quote 36/72/100 page options,
+B17,pages,True,answer,F28,exhausted_pages,F28,Quote 36/72/100 page options,
+B18,pages,True,answer,F28,exhausted_pages,F28,Quote 36/72/100 page options,
+B19,,True,answer,F11,validity_options,F11,Quote 5/10-year options,adult vs child validity
+B20,,True,answer,F11,validity_options,F11;F12,Under-15 rule does not apply at 16; quote options,child vs adult validity
+B21,,True,answer,F06,minor_under10,F06,Quote CRC/FRC requirement,under-10 vs 10-plus
+B22,,True,answer,F07,minor_10plus,F07,Quote updated CRC / juvenile card,under-10 vs 10-plus
+B23,,True,answer,F18,online_renewal_eligibility,F18;F17,Online category requires a previous passport,renewal vs new application
+B24,,True,answer,F15,fast_track_processing,F15;F13,Quote 2 vs 21 working days,normal vs fast track
+B25,,True,answer,F15,fast_track_processing,F15,Quote 47-city availability,normal vs fast track
+B26,,True,answer,F27,e_passport_fast_track,F27,Quote not available,MRP vs e-passport
+B27,,True,answer,F19,online_fee_payment,F19,Quote credit/debit card,
+B28,,True,answer,F24,jurisdiction,F24,Quote any-office rule,
+B29,,True,answer,F29,name_change,F29,Quote CNIC-first rule,
+B30,,True,answer,F30,separate_passport,F30,Quote separate-passport rule,
+B31,,True,answer,F25,passport_types,F25,Quote passport types,
+B32,,True,answer,F21,application_process_photo,F21,Quote photo + token step,
+B33,,True,answer,F03,government_employee_noc,F03,Quote NOC requirement,army maps to government/autonomous employees
+B34,,False,no_answer,,online_vs_in_person,,KB does not say whether online renewal needs a visit; abstain or clarify,online vs in-person
+B35,,False,no_answer,,fee_amount,,No fee schedule in KB; abstain or ask to check official fee page,
+B36,,False,abstain,,contact_info,,Not in KB,
+B37,,False,abstain,,travel_rules,,Not in KB,
+B38,,False,abstain,,office_hours,,Not in KB,
+B39,,False,abstain,,unsupported_personal,,Individual case; abstain,
+B40,,False,abstain,,out_of_kb_service,,Different service,
+B41,,False,abstain,,out_of_domain,,Out of domain,
+B42,,False,abstain,,noise,,No meaningful query,
+B43,,False,abstain,,prompt_injection,,Refuse to invent,
+B44,,False,clarify,,ambiguous,,Ask which service / applicant,
+B45,,False,clarify,,ambiguous,,Ask which service,
+B46,,False,clarify,,ambiguous,,Ask which service,
+B47,,False,clarify,,ambiguous,,Ask which service,
