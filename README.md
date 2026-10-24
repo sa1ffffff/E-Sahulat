@@ -31,6 +31,7 @@ With [Ollama](https://ollama.com) running and `ollama pull qwen2.5:3b` done, the
 | `FINAL_EVALUATION_REPORT.md` | measured results, baseline vs. final |
 | `CHANGELOG.md` | what changed in round 2, why, and the effect |
 | `baseline/`, `results/` | blind summaries, per-query results, run log, app metrics |
-| `report/report.tex` | LaTeX technical report; reads `esahulat/outputs/latex/results/` written by the notebook |
+| `report/technical_report.tex`, `.pdf` | full technical report (architecture, worked example, models, GUI, e5 results with charts); `python report/make_report_data.py` then `tectonic technical_report.tex` rebuilds it from the notebook's outputs |
+| `report/report.tex` | earlier LaTeX report; reads `esahulat/outputs/latex/results/` written by the notebook |
 
 The numbers in `results/` were produced with a non-neural stand-in for the dense model, because the build environment couldn't download e5. Re-run the notebook with e5 for the real figures.
