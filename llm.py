@@ -6,6 +6,10 @@ the answer/clarify/abstain decision or bring in outside facts. Numbers it writes
 import json
 import os
 import re
+import shutil
+import subprocess
+import time
+from pathlib import Path
 
 import requests
 
@@ -20,12 +24,36 @@ SYSTEM = ("You answer questions about Pakistani passports using ONLY the officia
           "End each sentence with the passage id it comes from, like [F01].")
 
 
-def available():
+def state():
+    """'ready', 'missing_model' (Ollama runs but MODEL isn't pulled) or 'offline'."""
     try:
         models = requests.get(f"{OLLAMA_URL}/api/tags", timeout=2).json().get("models", [])
     except (requests.RequestException, ValueError):
-        return False
-    return any(m["name"] == MODEL for m in models)
+        return "offline"
+    return "ready" if any(m["name"] == MODEL for m in models) else "missing_model"
+
+
+def available():
+    return state() == "ready"
+
+
+def start(wait=15):
+    """Launch `ollama serve` in the background if it's installed and not already running. Returns state()."""
+    if state() != "offline":
+        return state()
+    exe = shutil.which("ollama") or next(
+        (str(p) for p in [Path(os.environ.get("LOCALAPPDATA", "")) / "Programs/Ollama/ollama.exe"] if p.exists()), None)
+    if exe is None:
+        return "offline"
+    flags = getattr(subprocess, "CREATE_NO_WINDOW", 0) | getattr(subprocess, "DETACHED_PROCESS", 0)
+    subprocess.Popen([exe, "serve"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, creationflags=flags,
+                     start_new_session=os.name != "nt")
+    deadline = time.monotonic() + wait
+    while time.monotonic() < deadline:
+        if (s := state()) != "offline":
+            return s
+        time.sleep(0.5)
+    return "offline"
 
 
 def evidence_text(resp):

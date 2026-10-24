@@ -1,0 +1,70 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..800&family=Doto:wght@700&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:Archivo,sans-serif;background:#f5f6f1;color:#14201b;display:grid;grid-template-columns:248px 1fr 360px}
+.rail{background:#0d5640;color:#eaf3ee;padding:28px 20px;display:flex;flex-direction:column;gap:6px}
+.brand{font-stretch:80%;font-weight:800;font-size:26px;letter-spacing:-.01em}
+.brand-ur{font-family:'Noto Nastaliq Urdu';font-size:18px;direction:rtl;text-align:right;opacity:.85;margin:-4px 0 28px}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:8px;font-weight:600;font-size:15px}
+.nav.on{background:#f5f6f1;color:#0d5640}
+.nav span{font-family:'Noto Nastaliq Urdu';font-size:13px;font-weight:400}
+.rail .meta{margin-top:auto;font-size:12px;opacity:.7;line-height:1.6}
+main{padding:40px 48px;display:flex;flex-direction:column;gap:22px}
+h1{font-stretch:85%;font-weight:750;font-size:34px;letter-spacing:-.02em}
+.sub{color:#4a5a52;font-size:15px;margin-top:6px}
+.desk{background:#fff;border:1px solid #d6dcd5;border-radius:14px;padding:18px;display:flex;gap:12px;align-items:flex-end;box-shadow:0 1px 2px rgba(13,40,30,.06)}
+.desk .q{flex:1;font-size:18px;padding:6px 4px}
+.btn{background:#0d5640;color:#fff;border-radius:10px;padding:12px 22px;font-weight:700;font-size:15px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid #cfd7cf;border-radius:999px;padding:7px 13px;font-size:13px;background:#fff}
+.chip.ur{font-family:'Noto Nastaliq Urdu';font-size:12px}
+.slip{background:#fffef9;border-radius:6px;box-shadow:0 10px 30px -12px rgba(13,40,30,.35),0 1px 0 #e3e1d6;display:grid;grid-template-columns:150px 1fr;overflow:hidden}
+.tok{background:#14201b;color:#ffb21a;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;padding:18px}
+.tok b{font-family:Doto;font-size:46px;letter-spacing:.04em;line-height:1}
+.tok small{color:#9fb3a8;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.body{padding:20px 24px;display:flex;flex-direction:column;gap:14px}
+.state{display:flex;gap:10px;align-items:center;font-weight:700;font-size:14px;color:#0d5640}
+.dot{width:10px;height:10px;border-radius:50%;background:#1f9a5b}
+.state em{font-style:normal;font-weight:500;color:#5b6a62}
+.spine{display:grid;grid-template-columns:1fr 1px 1fr;gap:20px}
+.spine i{background:#dfe3dc}
+.en{font-size:19px;line-height:1.5}
+.urq{font-family:'Noto Nastaliq Urdu';direction:rtl;text-align:right;font-size:17px;line-height:2.2}
+.src{display:flex;gap:10px;align-items:center;font-size:13px;color:#4a5a52;border-top:1px dashed #d8d6c8;padding-top:12px}
+.code{font-weight:800;color:#0d5640;font-stretch:80%;border:1.5px solid #0d5640;border-radius:5px;padding:2px 7px}
+aside{background:#e9ece5;border-left:1px solid #d6dcd5;padding:32px 24px;display:flex;flex-direction:column;gap:12px}
+aside h3{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#4a5a52}
+.row{background:#14201b;border-radius:8px;padding:12px 14px;display:grid;grid-template-columns:76px 1fr;gap:10px;align-items:center;color:#d7e2dc;font-size:13px}
+.row b{font-family:Doto;color:#ffb21a;font-size:24px}
+.row .c{font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.row .c.a{color:#5fd39a}.row .c.k{color:#ffb21a}.row .c.x{color:#ff8a73}
+</style></head><body>
+<nav class="rail">
+<div class="brand">E-Sahulat</div><div class="brand-ur">ای سہولت</div>
+<div class="nav on">Ask <span>سوال</span></div>
+<div class="nav">Knowledge base <span>معلومات</span></div>
+<div class="nav">Evaluation <span>جانچ</span></div>
+<div class="meta">30 passages · 5 official DGI&amp;P pages<br>Runs locally, no external APIs</div>
+</nav>
+<main>
+<div><h1>Ask a passport question</h1><p class="sub">English, اردو or Roman Urdu. Every answer is a verbatim quote from an official DGI&amp;P page.</p></div>
+<div class="desk"><div class="q">Can a child under 15 get a ten-year passport?</div><div class="btn">Get token</div></div>
+<div class="chips"><span class="chip">Documents to renew a passport?</span><span class="chip ur">پاسپورٹ کی تجدید</span><span class="chip">Kitni fee hai?</span><span class="chip">Urgent processing time?</span></div>
+<div class="slip">
+<div class="tok"><small>Token</small><b>A-014</b><small>Counter 1</small></div>
+<div class="body">
+<div class="state"><span class="dot"></span>Answered from official text <em>· supported · 4 ms</em></div>
+<div class="spine"><p class="en">“Children under 15 years of age will be issued Passport having 05 years validity only.”</p><i></i><p class="urq">15 سال سے کم عمر بچوں کو صرف 05 سال کی مدت والا پاسپورٹ جاری کیا جائے گا۔</p></div>
+<div class="src"><span class="code">F12</span>DGI&amp;P · Ordinary Passport · Citation verified: quote, URL and numbers match</div>
+</div></div>
+</main>
+<aside>
+<h3>Now serving</h3>
+<div class="row"><b>A-014</b><div><div class="c a">Counter 1 · Answered</div>Child passport validity</div></div>
+<div class="row"><b>A-013</b><div><div class="c k">Counter 2 · Needs detail</div>Kitni fee hai?</div></div>
+<div class="row"><b>A-012</b><div><div class="c x">Counter 3 · Can’t verify</div>Cricket World Cup</div></div>
+<div class="row"><b>A-011</b><div><div class="c a">Counter 1 · Answered</div>Online renewal overseas</div></div>
+</aside>
+</body></html>

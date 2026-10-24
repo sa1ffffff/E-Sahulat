@@ -1,6 +1,6 @@
 # E-Sahulat AI: final evaluation report
 
-Generated 2026-10-16T19:19 from the notebook. Every number below comes from this run.
+Generated 2026-10-25T03:44 from the notebook. Every number below comes from this run.
 
 ## Configuration
 | item | value |
@@ -39,7 +39,7 @@ Blind set: 47 queries, {'en': 22, 'roman_ur': 14, 'ur': 11}. Written by the syst
 | cross-language: same decision | 0.833 | 0.667 | 6 |
 | cross-language: same decision and citation | 0.500 | 0.333 | 6 |
 | cross-language: all variants correct | 0.833 | 0.667 | 6 |
-| latency p50 / p95 ms | 1.7 / 2.5 | 28.2 / 37.7 | 47 |
+| latency p50 / p95 ms | 1.7 / 2.5 | 87.8 / 107.5 | 47 |
 
 Retrieval success is gold-in-top-5. Correct abstention is counted in decision accuracy and the false-answer rate. Citation support means the answer quotes the gold passage and the verifier passes.
 
@@ -101,10 +101,10 @@ Dev, end to end: same decision for en/ur/roman in 0.867 of 30 intents; same deci
 |  | TEST (previously inspected) | BRIEF | DEV |
 |---|---|---|---|
 | n | 60 | 12 | 139 |
-| p50 ms | 24.9 | 27.2 | 25.7 |
-| p95 ms | 29.9 | 34.2 | 31.0 |
-| mean ms | 25.4 | 27.8 | 25.7 |
-| max ms | 32.6 | 34.5 | 37.0 |
+| p50 ms | 87.7 | 75.4 | 87.6 |
+| p95 ms | 115.1 | 99.6 | 106.6 |
+| mean ms | 90.9 | 79.3 | 89.1 |
+| max ms | 148.1 | 103.1 | 124.7 |
 
 ## Dev-driven fixes
 | qid | query | gold | cause | fix | concepts | rerank_top1 | production_top1 | decision |

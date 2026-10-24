@@ -1,0 +1,124 @@
+{
+  "title": "Choose the visual world for E-Sahulat",
+  "question": "The roll assigned Token Hall. Keep it, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned", "kind": "assigned", "label": "Token Hall", "kicker": "THE ROLL",
+      "lineage": "Passport office token halls and their bilingual green-and-white wayfinding",
+      "thesis": "Every question is issued a token and called to the counter that can honestly serve it.",
+      "palette": ["#0d5640", "#f5f6f1", "#ffb21a", "#14201b", "#c4462f"],
+      "materials": ["bilingual civic signage", "thermal token slip", "dot-matrix LED numerals"],
+      "viewport": "Green signage rail with Ask, Knowledge base, Evaluation; centre: question desk and the printed token slip with the decision; right: a Now serving board of this session's tokens.",
+      "risk": "A queue can read as waiting; the slip must print instantly and the LED numerals stay a signature, not wallpaper.",
+      "raised": [
+        {"from": "challenger-catalog", "raise": "Knowledge base becomes a whole-cell grid of the 30 coded passages; every citation jumps to its cell."},
+        {"from": "challenger-fac", "raise": "The passage code (F01 to F30) is the primary handle everywhere, set like a counter number."},
+        {"from": "challenger-score", "raise": "English and Urdu sit mirrored about a centre spine in evidence, LTR left, RTL right."},
+        {"from": "challenger-datamatics", "raise": "Trace and evaluation numbers set in tabular figures at real data density."},
+        {"from": "challenger-density", "raise": "Evaluation uses one strict hairline module system instead of floating cards."}
+      ],
+      "html": ".impeccable/mocks/decision/assigned.html"
+    },
+    {
+      "id": "model-pick", "kind": "pick", "label": "Attested True Copy", "kicker": "IMPECCABLE’S PICK",
+      "lineage": "Gazetted-officer attestation stamps on photocopied documents",
+      "thesis": "Every answer is a photocopy of the official line, stamped and signed as a true copy.",
+      "palette": ["#f4f2ec", "#1b1b1f", "#5a3ea8", "#1f6b4f"],
+      "materials": ["photocopy grain", "violet rubber stamp", "ruled file cover"],
+      "viewport": "Top bar and tabs; the quote sits as a copied strip with a violet verified true copy stamp over its corner and the source line beneath.",
+      "risk": "Stamps are the familiar official move most runs reach for, and stamp texture tips into kitsch fast.",
+      "html": ".impeccable/mocks/decision/model-pick.html"
+    },
+    {
+      "id": "challenger-lexicon", "kind": "challenger", "catalogId": "rw-lexicon-shoulder-and-plate",
+      "label": "Lexicon, Shoulder and Plate", "verdict": "competitive",
+      "lineage": "Nineteenth-century lexicon pages",
+      "thesis": "Each passage is a lexicon entry; colour lives only inside bordered plates.",
+      "palette": ["#f2ead8", "#161412", "#d2452b", "#2b4fa8"],
+      "materials": ["uncoated stock", "engraved rules", "colour plates"],
+      "viewport": "Guide words in the head rule naming the passages in view; answer as a hanging entry with apparatus; decision as a bordered colour plate.",
+      "case": "Fuses cleanly with verbatim quoting and wins on precision, but a European reference book is not a citizen's world.",
+      "risk": "Cream and serif lands on the bookish default and distances Urdu readers.",
+      "hero": "https://impeccable.style/worlds/cards/rw-lexicon-shoulder-and-plate-hero.webp",
+      "html": ".impeccable/mocks/decision/challenger-lexicon.html"
+    },
+    {
+      "id": "challenger-catalog", "kind": "challenger", "catalogId": "pop-culture-shelf-doujin-event-catalog",
+      "label": "Convention Catalog", "verdict": "declined",
+      "lineage": "Doujin event circle catalogs",
+      "thesis": "Thousands of coded cells mapped to a hall.",
+      "palette": ["#efece4", "#151515", "#e2462f"],
+      "materials": ["newsprint", "biro circles"],
+      "viewport": "Packed thumbnail grid keyed to a hall map.",
+      "case": "Loses both axes: no citizen identification, too dense to ask from.",
+      "risk": "Reads as fandom ephemera.",
+      "kept": "Whole-cell coded grid for the 30 passages, with jump-to-cell citations.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-doujin-event-catalog-hero.webp"
+    },
+    {
+      "id": "challenger-fac", "kind": "challenger", "catalogId": "brand-identity-canon-saville-catalog-sleeve",
+      "label": "Factory Catalog Sleeve", "verdict": "declined",
+      "lineage": "Factory Records sleeves",
+      "thesis": "Everything is a numbered catalog entry.",
+      "palette": ["#0b0b0b", "#f2f2f2", "#e94b3c", "#3c7be9"],
+      "materials": ["matte black", "hairline plot"],
+      "viewport": "A fac number and one plot on black.",
+      "case": "Loses both axes: coded labels fight clarity for citizens.",
+      "risk": "Cryptic by design.",
+      "kept": "Catalog-number discipline: passage codes as the headline handle.",
+      "hero": "https://impeccable.style/worlds/cards/brand-identity-canon-saville-catalog-sleeve-hero.webp"
+    },
+    {
+      "id": "challenger-density", "kind": "challenger", "catalogId": "japanese-high-density-web",
+      "label": "High-density Web", "verdict": "declined",
+      "lineage": "Japanese portal sites",
+      "thesis": "Pack every module edge to edge.",
+      "palette": ["#ffffff", "#111111", "#d7262e", "#cfd3d8"],
+      "materials": ["hairline modules", "red tabs"],
+      "viewport": "Mosaic of ruled modules.",
+      "case": "Loses both axes: overwhelms a phone user with one question.",
+      "risk": "Clutter.",
+      "kept": "One strict hairline module system for the Evaluation screen.",
+      "hero": "https://impeccable.style/worlds/cards/japanese-high-density-web-hero.webp"
+    },
+    {
+      "id": "challenger-score", "kind": "challenger", "catalogId": "notation-diagram-systems-labanotation",
+      "label": "Dance Score", "verdict": "declined",
+      "lineage": "Labanotation",
+      "thesis": "A vertical staff with mirrored columns.",
+      "palette": ["#ffffff", "#111111", "#d9d9d9"],
+      "materials": ["score paper", "hatched blocks"],
+      "viewport": "Centre staff, columns either side.",
+      "case": "Loses both axes: notation is foreign to the task.",
+      "risk": "Abstract.",
+      "kept": "Bilateral symmetry: English and Urdu mirrored about a centre spine.",
+      "hero": "https://impeccable.style/worlds/cards/notation-diagram-systems-labanotation-hero.webp"
+    },
+    {
+      "id": "challenger-datamatics", "kind": "challenger", "catalogId": "ikeda-datamatics",
+      "label": "Datamatics", "verdict": "declined",
+      "lineage": "Ryoji Ikeda",
+      "thesis": "Black and white data fields.",
+      "palette": ["#000000", "#ffffff"],
+      "materials": ["barcode bars", "monospace numerics"],
+      "viewport": "Strobing bar field.",
+      "case": "Loses both axes: hostile to a citizen in a hurry.",
+      "risk": "Strobing, inaccessible.",
+      "kept": "Tabular numerals at true data density for trace and metrics.",
+      "hero": "https://impeccable.style/worlds/cards/ikeda-datamatics-hero.webp"
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code"},
+  "canon": true,
+  "canonCard": {
+    "kind": "canon", "label": "The category standard",
+    "thesis": "A clean government-services assistant: white, black type, one green accent, chat bubbles.",
+    "palette": ["#ffffff", "#0b0c0c", "#00703c", "#f3f2f1"],
+    "materials": ["clean grid", "chat thread"],
+    "viewport": "Header, tabs, chat thread with source cards under each reply.",
+    "risk": "Indistinguishable from every gov chatbot by design.",
+    "html": ".impeccable/mocks/decision/canon.html"
+  },
+  "steer": true
+}

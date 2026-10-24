@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-25T00:00:00Z",
+  "title": "Design System: E-Sahulat",
+  "extensions": {
+    "colorMeta": {
+      "paper": { "role": "neutral", "displayName": "Photocopy White", "canonical": "oklch(96.3% 0.004 106.5)", "tonalRamp": ["#0b0b09", "#242422", "#40403d", "#5e5e5b", "#7d7d7b", "#9e9e9c", "#c7c7c4", "#efefec"] },
+      "sheet": { "role": "neutral", "displayName": "Sheet White", "canonical": "oklch(98.7% 0.004 106.5)", "tonalRamp": ["#0b0b09", "#242422", "#40403d", "#5e5e5b", "#7d7d7b", "#9e9e9c", "#c7c7c4", "#efefec"] },
+      "strip": { "role": "neutral", "displayName": "Strip White", "canonical": "oklch(100% 0 0)", "tonalRamp": ["#0b0b0b", "#242424", "#404040", "#5d5d5d", "#7d7d7d", "#9e9e9e", "#c7c7c7", "#eeeeee"] },
+      "ink": { "role": "neutral", "displayName": "Toner Black", "canonical": "oklch(22.4% 0.008 285.8)", "tonalRamp": ["#0b0b0e", "#242428", "#3f3f44", "#5d5d62", "#7d7d82", "#9e9ea3", "#c7c7cc", "#eeeef4"] },
+      "ink-2": { "role": "neutral", "displayName": "Toner Gray", "canonical": "oklch(39.3% 0.012 285.8)", "tonalRamp": ["#0b0a10", "#23232a", "#3f3f46", "#5d5d64", "#7c7c84", "#9d9da6", "#c6c6cf", "#ededf6"] },
+      "ink-3": { "role": "neutral", "displayName": "Toner Light", "canonical": "oklch(50.6% 0.011 286.0)", "tonalRamp": ["#0b0b10", "#232329", "#3f3f45", "#5d5d64", "#7c7c84", "#9d9ea5", "#c6c6ce", "#edeef6"] },
+      "rule": { "role": "neutral", "displayName": "Hairline", "canonical": "oklch(89.0% 0.010 100.0)", "tonalRamp": ["#0c0b07", "#25241f", "#41403a", "#5f5e58", "#7e7d77", "#a09f98", "#c8c7c1", "#f0efe8"] },
+      "rule-strong": { "role": "neutral", "displayName": "Strong Hairline", "canonical": "oklch(81.6% 0.011 100.9)", "tonalRamp": ["#0c0b06", "#25241e", "#414039", "#5f5e57", "#7e7e76", "#a09f97", "#c9c8c0", "#f0efe6"] },
+      "toner": { "role": "neutral", "displayName": "Toner Haze", "canonical": "rgba(27, 27, 31, 0.05)" },
+      "cover": { "role": "primary", "displayName": "Bottle-Green File Cover", "canonical": "oklch(37.1% 0.060 163.2)", "tonalRamp": ["#000f08", "#012c1c", "#1d4a37", "#3c6854", "#5b8973", "#7cab94", "#a4d4bc", "#cbfce3"] },
+      "cover-deep": { "role": "primary", "displayName": "Deep Cover", "canonical": "oklch(30.6% 0.049 162.5)", "tonalRamp": ["#000f07", "#082b1d", "#264838", "#446655", "#638775", "#84a895", "#acd2be", "#d2f9e5"] },
+      "cover-ink": { "role": "primary", "displayName": "Cover Ink", "canonical": "oklch(96.1% 0.009 150.7)", "tonalRamp": ["#080c09", "#212522", "#3c413d", "#5a5f5b", "#7a7f7a", "#9aa09b", "#c3c9c4", "#eaf0eb"] },
+      "cover-ink-2": { "role": "primary", "displayName": "Cover Ink Muted", "canonical": "oklch(81.8% 0.031 157.8)", "tonalRamp": ["#010f06", "#17291e", "#324539", "#506357", "#6f8376", "#8fa597", "#b8cec0", "#def5e7"] },
+      "verified": { "role": "secondary", "displayName": "Attestation Violet", "canonical": "oklch(45.5% 0.162 290.7)", "tonalRamp": ["#0e002a", "#29065f", "#44238c", "#6146b0", "#7f67d5", "#a089fa", "#c7befe", "#eeecfe"] },
+      "particulars": { "role": "secondary", "displayName": "Particulars Ochre", "canonical": "oklch(50.8% 0.108 73.3)", "tonalRamp": ["#130900", "#341f00", "#583802", "#7f5307", "#a47228", "#c7934c", "#f2bc75", "#feebd4"] },
+      "not-on-record": { "role": "secondary", "displayName": "Not-on-Record Red", "canonical": "oklch(50.1% 0.178 28.7)", "tonalRamp": ["#1f0000", "#490503", "#7d0102", "#ac1d17", "#d2463a", "#f96a5b", "#fdb1a6", "#fee9e5"] },
+      "verified-wash": { "role": "secondary", "displayName": "Violet Wash", "canonical": "oklch(94.7% 0.018 300.1)", "tonalRamp": ["#0c0912", "#25222c", "#413e48", "#5f5b66", "#7f7b87", "#a09ca8", "#c9c5d1", "#f0ecf9"] },
+      "series-1": { "role": "tertiary", "displayName": "Ledger Green", "canonical": "oklch(56.4% 0.115 161.0)", "tonalRamp": ["#000f07", "#032c1b", "#0c4c32", "#026f49", "#2b9266", "#52b487", "#7edfaf", "#c6fedf"] },
+      "series-2": { "role": "tertiary", "displayName": "Survey Blue", "canonical": "oklch(54.5% 0.148 256.7)", "tonalRamp": ["#000a21", "#01224e", "#043d80", "#1a5baf", "#3d7dd3", "#5e9ff8", "#a5cafd", "#e5f0ff"] },
+      "series-3": { "role": "tertiary", "displayName": "Docket Rose", "canonical": "oklch(61.5% 0.137 354.2)", "tonalRamp": ["#1c000d", "#470027", "#711144", "#953563", "#ba5682", "#df78a4", "#feaacc", "#ffe7f0"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "One page heading per view; 27px under 760px; Urdu companion line opposite." },
+      "headline": { "displayName": "Headline", "purpose": "The question as the attested document's title." },
+      "title": { "displayName": "Title", "purpose": "Chart, report, register and explainer headings (15-17px, 650-750)." },
+      "body": { "displayName": "Body", "purpose": "Running text with tabular figures; ledes cap at 62ch." },
+      "quote": { "displayName": "Gazette Quote", "purpose": "Verbatim official English only; 19px on mobile, 17.5px in the Knowledge base." },
+      "urdu": { "displayName": "Urdu Nastaliq", "purpose": "Every Urdu string, right to left, line-height 1.9 or more." },
+      "stamp": { "displayName": "Stamp Cut", "purpose": "Uppercase stamp titles only; sub-lines 650 11px at 80% width, 0.1em." },
+      "code": { "displayName": "Passage Code", "purpose": "F01-F30 passage codes; 17px in the ledger." },
+      "figure": { "displayName": "KPI Figure", "purpose": "Evaluation KPI values; 32px on mobile." },
+      "label": { "displayName": "Field Label", "purpose": "Uppercase names of trace fields and decision words in Today's file; never above a heading." }
+    },
+    "shadows": [
+      { "name": "sheet", "value": "0 1px 1px rgba(27, 27, 31, 0.04), 0 10px 28px -16px rgba(27, 27, 31, 0.28)", "purpose": "Attested document and evaluation report sheets." },
+      { "name": "strip", "value": "inset 1px 0 0 rgba(27, 27, 31, 0.07), inset -1px 0 0 rgba(27, 27, 31, 0.07), 0 1px 1px rgba(27, 27, 31, 0.06), 0 6px 14px -10px rgba(27, 27, 31, 0.35)", "purpose": "Quote strip pasted onto a sheet." },
+      { "name": "rest", "value": "0 1px 2px rgba(27, 27, 31, 0.05)", "purpose": "Composer at rest." },
+      { "name": "focus-halo", "value": "0 0 0 3px rgba(29, 74, 55, 0.14)", "purpose": "Composer and search focus, with a cover-green border." },
+      { "name": "float", "value": "0 8px 20px -8px rgba(0, 0, 0, 0.4)", "purpose": "Chart tooltip only." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Entrances, press feedback, tab indicator, switch thumb, disclosure chevrons." },
+      { "name": "ease-in-out", "value": "cubic-bezier(0.77, 0, 0.175, 1)", "purpose": "Indeterminate loading bar." },
+      { "name": "stamp-land", "value": "200ms ease-out, 120ms delay; scale 1.22 to 1, rotate -4deg to 0, opacity 0 to 1", "purpose": "The stamp pressing onto a fresh answer, once." },
+      { "name": "sheet-in", "value": "260ms ease-out; translateY 8px and opacity 0 to rest", "purpose": "A fresh document; quote strips follow at 240ms with 50ms stagger from 80ms." },
+      { "name": "press", "value": "scale(0.97), 120-140ms ease-out", "purpose": "Buttons, chips, segmented options; passage codes at 0.96." },
+      { "name": "tab-indicator", "value": "220ms ease-out transform", "purpose": "Active-tab bar sliding under the cover tabs." },
+      { "name": "bar-grow", "value": "560ms ease-out, 24ms stagger capped at 14", "purpose": "Chart bars revealing on first draw." },
+      { "name": "row-flash", "value": "1400ms ease-out, verified-wash to transparent", "purpose": "Knowledge base row reached from a passage code." },
+      { "name": "hover-state", "value": "150ms ease colour and background", "purpose": "Hover fills, gated to (hover: hover) and (pointer: fine)." },
+      { "name": "reduced-motion", "value": "durations to 1ms; progress bar static", "purpose": "prefers-reduced-motion: reduce." }
+    ],
+    "breakpoints": [
+      { "name": "stack", "value": "1080px" },
+      { "name": "mobile", "value": "760px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The Ask action: bottle green with cover ink and a trailing arrow.",
+      "html": "<button class=\"ds-btn-primary\">Ask <svg class=\"ds-icon\" viewBox=\"0 0 24 24\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; border: 1px solid transparent; border-radius: 9px; padding: 9px 18px; font: 650 15px/1.5 \"Archivo\", ui-sans-serif, system-ui, sans-serif; background: var(--cover, #1d4a37); color: var(--cover-ink, #eef4ef); cursor: pointer; transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), background-color 150ms ease; } .ds-btn-primary:hover { background: var(--cover-deep, #153728); } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: 2px solid var(--focus, #5a3ea8); outline-offset: 2px; } .ds-icon { width: 1em; height: 1em; stroke: currentColor; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Secondary actions such as clearing a filter: transparent with a strong hairline.",
+      "html": "<button class=\"ds-btn-quiet\">Clear the filter</button>",
+      "css": ".ds-btn-quiet { border: 1px solid var(--rule-strong, #c4c3bb); border-radius: 9px; padding: 7px 14px; font: 650 14px/1.5 \"Archivo\", ui-sans-serif, system-ui, sans-serif; background: transparent; color: var(--ink, #1b1b1f); cursor: pointer; transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), background-color 150ms ease; } .ds-btn-quiet:hover { background: var(--sheet, #fbfbf8); } .ds-btn-quiet:active { transform: scale(0.97); } .ds-btn-quiet:focus-visible { outline: 2px solid var(--focus, #5a3ea8); outline-offset: 2px; }"
+    },
+    {
+      "name": "Example Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Example questions under the composer, as hairline pills.",
+      "html": "<button class=\"ds-chip\">Kitni fee hai?</button>",
+      "css": ".ds-chip { border: 1px solid var(--rule-strong, #c4c3bb); background: transparent; border-radius: 999px; padding: 6px 13px; font: 400 13.5px/1.5 \"Archivo\", ui-sans-serif, system-ui, sans-serif; color: var(--ink-2, #45454c); cursor: pointer; transition: background-color 150ms ease, border-color 150ms ease, transform 120ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-chip:hover { background: var(--sheet, #fbfbf8); border-color: var(--ink-3, #64646b); color: var(--ink, #1b1b1f); } .ds-chip:active { transform: scale(0.97); } .ds-chip:focus-visible { outline: 2px solid var(--focus, #5a3ea8); outline-offset: 2px; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Knowledge base filter: 44px, sheet white, green focus border and halo.",
+      "html": "<div class=\"ds-search\"><svg class=\"ds-search-icon\" viewBox=\"0 0 24 24\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"m20 20-3.6-3.6\"/></svg><input type=\"search\" placeholder=\"Filter: NOC, minor, fast track\"></div>",
+      "css": ".ds-search { position: relative; max-width: 480px; } .ds-search-icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); width: 17px; height: 17px; stroke: var(--ink-3, #64646b); fill: none; stroke-width: 1.75; stroke-linecap: round; } .ds-search input { width: 100%; box-sizing: border-box; height: 44px; border: 1px solid var(--rule-strong, #c4c3bb); background: var(--sheet, #fbfbf8); border-radius: 10px; padding: 0 14px 0 40px; font: 400 15.5px \"Archivo\", ui-sans-serif, system-ui, sans-serif; color: var(--ink, #1b1b1f); transition: border-color 150ms ease, box-shadow 150ms ease; } .ds-search input::placeholder { color: var(--ink-3, #64646b); } .ds-search input:focus { outline: none; border-color: var(--cover, #1d4a37); box-shadow: 0 0 0 3px rgba(29, 74, 55, 0.14); }"
+    },
+    {
+      "name": "File-Cover Navigation",
+      "kind": "nav",
+      "refersTo": "cover-bar",
+      "description": "Sticky bottle-green bar with wordmark, section tabs and pipeline status.",
+      "html": "<header class=\"ds-cover\"><a class=\"ds-wordmark\"><b>E-Sahulat</b><span lang=\"ur\">ای سہولت</span></a><nav class=\"ds-tabs\"><a class=\"ds-tab ds-on\">Ask</a><a class=\"ds-tab\">Knowledge base</a><a class=\"ds-tab\">Evaluation</a></nav><span class=\"ds-status\"><i></i>30 passages · runs locally</span></header>",
+      "css": ".ds-cover { display: flex; align-items: center; gap: 40px; height: 64px; padding: 0 32px; background: var(--cover, #1d4a37); color: var(--cover-ink, #eef4ef); font-family: \"Archivo\", ui-sans-serif, system-ui, sans-serif; } .ds-wordmark { display: flex; align-items: baseline; gap: 10px; white-space: nowrap; } .ds-wordmark b { font-weight: 800; font-size: 21px; letter-spacing: -0.015em; } .ds-wordmark span { font-family: \"Noto Nastaliq Urdu\", serif; font-size: 15px; line-height: 1; color: var(--cover-ink-2, #b4cabc); } .ds-tabs { display: flex; gap: 4px; height: 100%; } .ds-tab { display: flex; align-items: center; height: 100%; padding: 0 14px; font-weight: 600; font-size: 15px; color: var(--cover-ink-2, #b4cabc); cursor: pointer; box-shadow: inset 0 -3px 0 transparent; transition: color 150ms ease, box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-tab:hover { color: var(--cover-ink, #eef4ef); } .ds-tab.ds-on { color: var(--cover-ink, #eef4ef); box-shadow: inset 0 -3px 0 var(--cover-ink, #eef4ef); } .ds-tab:focus-visible { outline: 2px solid var(--cover-ink, #eef4ef); outline-offset: -4px; } .ds-status { margin-left: auto; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--cover-ink-2, #b4cabc); } .ds-status i { width: 8px; height: 8px; border-radius: 50%; background: #6fd39e; }"
+    },
+    {
+      "name": "Verdict Stamps",
+      "kind": "custom",
+      "refersTo": "stamp-verified",
+      "description": "The three rubber stamps: verified true copy (violet), particulars required (ochre), not on record (red).",
+      "html": "<div class=\"ds-stamps\"><div class=\"ds-stamp\"><div class=\"ds-stamp-in\"><b>Verified true copy</b><small>F14 · quoted from dgip.gov.pk</small></div></div><div class=\"ds-stamp ds-clarify\"><div class=\"ds-stamp-in\"><b>Particulars required</b><small>Several services match</small></div></div><div class=\"ds-stamp ds-abstain\"><div class=\"ds-stamp-in\"><b>Not on record</b><small>Not covered by the pages</small></div></div></div>",
+      "css": ".ds-stamps { display: flex; flex-wrap: wrap; gap: 28px; padding: 24px; background: var(--sheet, #fbfbf8); } .ds-stamp { --c: var(--verified, #5a3ea8); display: inline-block; transform: rotate(-5deg); border: 2.5px solid var(--c); border-radius: 9px; padding: 3px; color: var(--c); mix-blend-mode: multiply; text-align: center; font-family: \"Archivo\", ui-sans-serif, sans-serif; -webkit-mask-image: linear-gradient(100deg, #000 0 55%, rgba(0,0,0,0.72) 100%); mask-image: linear-gradient(100deg, #000 0 55%, rgba(0,0,0,0.72) 100%); transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-stamp:hover { transform: rotate(-5deg) scale(1.03); } .ds-stamp-in { border: 1px solid var(--c); border-left-width: 1.5px; border-radius: 6px; padding: 7px 14px 6px; } .ds-stamp b { display: block; font-stretch: 72%; font-weight: 850; font-size: 19px; letter-spacing: 0.06em; line-height: 1.05; text-transform: uppercase; } .ds-stamp small { display: block; margin-top: 2px; font-stretch: 80%; font-weight: 650; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; } .ds-clarify { --c: var(--particulars, #8a5a00); } .ds-abstain { --c: var(--not-on-record, #b3261e); transform: rotate(-3deg); } .ds-abstain:hover { transform: rotate(-3deg) scale(1.03); }"
+    },
+    {
+      "name": "Quote Strip",
+      "kind": "custom",
+      "refersTo": "quote-strip",
+      "description": "Verbatim official text pasted on a sheet: serif English and Nastaliq Urdu side by side, with code and source below.",
+      "html": "<div class=\"ds-sheet\"><div class=\"ds-strip\"><p class=\"ds-q\">“Urgent — 5 working days. The delivery time taken by the courier company is not included in the above-mentioned time frame.”</p><i></i><p class=\"ds-ur\" lang=\"ur\" dir=\"rtl\">ارجنٹ: 5 کاروباری دن؛ کوریئر کی ترسیل کا وقت اس مدت میں شامل نہیں۔</p></div><div class=\"ds-source\"><a class=\"ds-code\">F14</a><span>Ordinary Passport (requirements, validity, processing)</span></div></div>",
+      "css": ".ds-sheet { background: var(--sheet, #fbfbf8); border-radius: 4px; padding: 28px 32px; box-shadow: 0 1px 1px rgba(27,27,31,0.04), 0 10px 28px -16px rgba(27,27,31,0.28); } .ds-strip { display: grid; grid-template-columns: minmax(0,1fr) 1px minmax(0,0.92fr); gap: 24px; background: var(--strip, #fff); padding: 20px 24px; margin: 0 -8px; transform: rotate(-0.25deg); box-shadow: inset 1px 0 0 rgba(27,27,31,0.07), inset -1px 0 0 rgba(27,27,31,0.07), 0 1px 1px rgba(27,27,31,0.06), 0 6px 14px -10px rgba(27,27,31,0.35); } .ds-strip > i { background: var(--rule, #dcdbd4); } .ds-q { margin: 0; font: 400 21px/1.5 \"Source Serif 4\", Georgia, serif; letter-spacing: -0.003em; color: var(--ink, #1b1b1f); } .ds-ur { margin: 0; font: 400 18px/2.25 \"Noto Nastaliq Urdu\", serif; text-align: right; color: var(--ink-2, #45454c); } .ds-source { margin-top: 14px; display: flex; gap: 14px; align-items: center; font: 400 13.5px \"Archivo\", sans-serif; color: var(--ink-2, #45454c); } .ds-code { display: inline-flex; align-items: center; height: 24px; padding: 0 7px; border: 1.5px solid var(--cover, #1d4a37); border-radius: 5px; color: var(--cover, #1d4a37); font-stretch: 78%; font-weight: 800; font-size: 14px; letter-spacing: 0.04em; cursor: pointer; transition: background-color 150ms ease, color 150ms ease, transform 120ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-code:hover { background: var(--cover, #1d4a37); color: var(--cover-ink, #eef4ef); } .ds-code:active { transform: scale(0.96); } .ds-code:focus-visible { outline: 2px solid var(--focus, #5a3ea8); outline-offset: 2px; }"
+    },
+    {
+      "name": "Reply-Language Segmented Control",
+      "kind": "custom",
+      "refersTo": "segmented-option-active",
+      "description": "Paper track with a sheet-white pressed option; Urdu option in Nastaliq.",
+      "html": "<div class=\"ds-seg\" role=\"group\"><button aria-pressed=\"true\">Auto</button><button aria-pressed=\"false\">English</button><button aria-pressed=\"false\"><span lang=\"ur\" class=\"ds-ur-label\">اردو</span></button><button aria-pressed=\"false\">Roman Urdu</button></div>",
+      "css": ".ds-seg { display: inline-flex; background: var(--paper, #f3f3f0); border: 1px solid var(--rule, #dcdbd4); border-radius: 9px; padding: 2px; } .ds-seg button { border: 0; background: transparent; border-radius: 7px; padding: 5px 11px; font: 600 13px/1.5 \"Archivo\", sans-serif; color: var(--ink-2, #45454c); cursor: pointer; transition: background-color 150ms ease, color 150ms ease, transform 120ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-seg button[aria-pressed=\"true\"] { background: var(--sheet, #fbfbf8); color: var(--ink, #1b1b1f); box-shadow: 0 1px 2px rgba(27,27,31,0.12); } .ds-seg button:hover { color: var(--ink, #1b1b1f); } .ds-seg button:active { transform: scale(0.97); } .ds-seg button:focus-visible { outline: 2px solid var(--focus, #5a3ea8); outline-offset: 2px; } .ds-ur-label { font-family: \"Noto Nastaliq Urdu\", serif; font-weight: 400; line-height: 1; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Attested True Copy",
+    "overview": "Every answer is a photocopy of the official line, attested by a rubber stamp. The interface is an office file, not a conversation: a bottle-green file cover holds the app, a photocopy-white ground carries toner-gray rules, and each question produces one document sheet with the verbatim official passage pasted on as a paper strip and a stamp pressed into its corner. There is no message thread and no assistant voice; the quote and its source are the answer, and the stamp is the verdict.\n\nDensity is calm and clerical. The Ask view runs a two-thirds working column beside a one-third \"Today's file\" register; the Knowledge base reads like a ledger of coded passages; Evaluation reads like a measured report sheet with KPI figures under a heavy ink rule. Refusal carries equal visual weight: \"Particulars required\" and \"Not on record\" get the same stamp, sheet and care as \"Verified true copy\".\n\nEnglish and Urdu are set as equals. Urdu is always Nastaliq, right to left, with generous leading, and sits beside the English quote on the same strip rather than below it as a translation.",
+    "keyCharacteristics": [
+      "Bottle-green file-cover shell over photocopy-white paper.",
+      "One attested document per question; no chat bubbles, no thread.",
+      "Three rubber-stamp inks carry the three decisions, and only decisions.",
+      "Verbatim official text in a gazette serif on slightly tilted paper strips.",
+      "Urdu Nastaliq and English side by side on the same strip, same weight.",
+      "Flat controls with hairline borders; shadows belong only to paper."
+    ],
+    "rules": [
+      { "name": "The Three Inks Rule", "body": "Violet, ochre and red mean verified, particulars required and not on record. They appear on stamps, decision marks, verification lines and warnings about unverified content, never as decoration, category colour or chart series. Violet's only non-verdict duties are the focus ring and the highlight tint.", "section": "colors" },
+      { "name": "The Chart Is Not a Verdict Rule", "body": "Evaluation series use series-1/2/3 in order, never a stamp ink, so a red bar is never read as \"not on record\".", "section": "colors" },
+      { "name": "The Green Means Act Rule", "body": "Bottle green is the file cover and every primary action on the file; it is not used for status or success.", "section": "colors" },
+      { "name": "The Gazette Quote Rule", "body": "The serif is reserved for verbatim official text. UI, summaries and headings stay in Archivo.", "section": "typography" },
+      { "name": "The Equal Scripts Rule", "body": "Urdu is always Nastaliq, right to left, with line-height of at least 1.9, at a size equal to or larger than the English beside it. When the question is Urdu, the strip flips: Urdu leads at 21px in full ink, English follows at 17px in ink-2.", "section": "typography" },
+      { "name": "The Stamp Cut Rule", "body": "The condensed heavy uppercase cut belongs to stamps; the condensed bold cut to passage codes and KPI figures. Neither is used for headings.", "section": "typography" },
+      { "name": "The Paper Lifts Rule", "body": "If it is not a sheet of paper, it does not cast a shadow. Buttons, chips, inputs and panels are flat.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do give every question exactly one stamped document, whatever the decision.",
+      "Do keep violet, ochre and red for verdicts and verification only, per The Three Inks Rule.",
+      "Do use series-1, series-2, series-3 in order for chart series.",
+      "Do set every verbatim official sentence in Source Serif 4 on a white quote strip, with its passage code and source link beneath.",
+      "Do set Urdu in Noto Nastaliq Urdu, right to left, line-height 1.9 or more, at a size no smaller than the English beside it.",
+      "Do gate hover effects behind `(hover: hover) and (pointer: fine)`, press feedback at scale 0.97, and honour reduced motion.",
+      "Do head ledgers, registers and KPI rows with a 2px ink rule and separate rows with 1px hairlines."
+    ],
+    "donts": [
+      "Don't render answers as chat bubbles or a conversation thread.",
+      "Don't use a stamp ink for a chart series, a category colour, or decoration.",
+      "Don't set UI chrome, headings or summaries in the serif; it marks official text.",
+      "Don't show Urdu in Archivo or any non-Nastaliq face.",
+      "Don't give controls, chips or panels a shadow; only paper lifts.",
+      "Don't put uppercase tracked labels above headings; labels name trace fields and decisions only.",
+      "Don't tilt controls; only paper strips and stamps sit off-true."
+    ],
+    "openItems": [
+      "Fonts load from Google Fonts (Archivo, Noto Nastaliq Urdu, Source Serif 4). Self-hosting is pending the user's approval; until then the system fonts in each stack are the fallback."
+    ]
+  }
+}
