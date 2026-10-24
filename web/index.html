@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1d4a37">
+<meta name="description" content="Passport answers quoted verbatim from official DGI&amp;P pages, in English, Urdu and Roman Urdu.">
+<title>E-Sahulat · Passport answers from official sources</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d4a37'/%3E%3Crect x='6.5' y='9' width='19' height='14' rx='3' fill='none' stroke='%23eef4ef' stroke-width='2.4' transform='rotate(-8 16 16)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Noto+Nastaliq+Urdu:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m8.8 12.2 2.3 2.3 4.3-4.6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4.5M12 17h.01"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M9 7H6a5 5 0 0 0 0 10h3M15 7h3a5 5 0 0 1 0 10h-3M8 12h8"/></symbol>
+  <symbol id="i-load" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.2-8.6"/></symbol>
+</svg>
+
+<header class="cover">
+  <div class="cover-inner">
+    <a class="wordmark" href="#/ask" aria-label="E-Sahulat, home"><b>E-Sahulat</b><span class="ur" lang="ur">ای سہولت</span></a>
+    <nav class="tabs" aria-label="Sections">
+      <a class="tab" href="#/ask" data-view="ask">Ask</a>
+      <a class="tab" href="#/kb" data-view="kb">Knowledge base</a>
+      <a class="tab" href="#/eval" data-view="eval">Evaluation</a>
+      <span class="tab-indicator" aria-hidden="true"></span>
+    </nav>
+    <div class="cover-status" role="status" aria-live="polite"><span class="pulse" id="pulse"></span><span class="label" id="status-label">Loading pipeline</span></div>
+  </div>
+</header>
+
+<main>
+  <div id="boot-banner" class="banner loading" hidden>
+    <svg class="icon"><use href="#i-load"/></svg>
+    <div><strong>Loading the pipeline from the notebook.</strong> The first run builds the indexes and can take a minute; you can read the evaluation meanwhile.
+      <div class="progress"><i></i></div></div>
+  </div>
+
+  <!-- Ask -->
+  <section class="view" id="view-ask" aria-labelledby="ask-title">
+    <div class="page-head">
+      <div>
+        <h1 id="ask-title">Ask a passport question</h1>
+        <p class="lede">English, Urdu or Roman Urdu. Every answer is a word-for-word quote from an official DGI&amp;P page, and when the pages don't cover it, you'll be told so.</p>
+      </div>
+      <p class="ur" lang="ur">پاسپورٹ سے متعلق اپنا سوال پوچھیں</p>
+    </div>
+
+    <div class="ask-grid">
+      <div>
+        <form class="composer" id="ask-form">
+          <label class="sr-only" for="query">Your question</label>
+          <textarea id="query" name="query" rows="2" dir="auto" maxlength="1000" placeholder="e.g. Which documents do I need to renew my passport?" autocomplete="off"></textarea>
+          <div class="composer-foot">
+            <div class="segmented" role="group" aria-label="Reply language" id="lang">
+              <button type="button" data-lang="auto" aria-pressed="true">Auto</button>
+              <button type="button" data-lang="en" aria-pressed="false">English</button>
+              <button type="button" data-lang="ur" aria-pressed="false"><span class="ur-label" lang="ur">اردو</span></button>
+              <button type="button" data-lang="roman_ur" aria-pressed="false">Roman Urdu</button>
+            </div>
+            <label class="switch" id="llm-switch">
+              <input type="checkbox" id="use-llm" role="switch" aria-describedby="llm-state" disabled> <span>Qwen summary</span>
+              <span class="llm-state" id="llm-state" data-state="checking">checking</span>
+            </label>
+            <span class="kbd">Enter to ask · Shift+Enter for a new line</span>
+            <button class="btn btn-primary" type="submit" id="ask-btn" disabled>Ask <svg class="icon"><use href="#i-arrow"/></svg></button>
+          </div>
+        </form>
+
+        <div class="examples" id="examples"><span>Try</span></div>
+
+        <div class="result" id="result" aria-live="polite"></div>
+      </div>
+
+      <aside class="file" aria-labelledby="file-title">
+        <div class="file-head"><h2 id="file-title">Today's file</h2><button type="button" id="clear-file" hidden>Clear</button></div>
+        <ul class="file-list" id="file-list"></ul>
+        <p class="file-empty" id="file-empty">Questions you ask appear here, so you can return to an answer.</p>
+        <dl class="about" id="about"></dl>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Knowledge base -->
+  <section class="view" id="view-kb" aria-labelledby="kb-title" hidden>
+    <div class="page-head">
+      <div>
+        <h1 id="kb-title">Knowledge base</h1>
+        <p class="lede" id="kb-lede">The official passages every answer is quoted from. Freshness: needs manual review against dgip.gov.pk.</p>
+      </div>
+      <p class="ur" lang="ur">سرکاری معلومات کا ذخیرہ</p>
+    </div>
+    <div class="kb-tools">
+      <div class="search">
+        <svg class="icon"><use href="#i-search"/></svg>
+        <label class="sr-only" for="kb-q">Filter passages</label>
+        <input id="kb-q" type="search" dir="auto" placeholder="Filter: NOC, minor, fast track, تجدید" autocomplete="off">
+      </div>
+      <label class="sr-only" for="kb-topic">Topic</label>
+      <select class="select" id="kb-topic"><option value="">All topics</option></select>
+      <span class="kb-count" id="kb-count"></span>
+    </div>
+    <ul class="kb-list" id="kb-list"></ul>
+  </section>
+
+  <!-- Evaluation -->
+  <section class="view" id="view-eval" aria-labelledby="eval-title" hidden>
+    <div class="page-head">
+      <div>
+        <h1 id="eval-title">Evaluation</h1>
+        <div class="eval-meta" id="eval-meta"></div>
+      </div>
+    </div>
+    <div id="eval-body"></div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <p>E-Sahulat is an unofficial university project. It is not a service of DGI&amp;P or NADRA; for decisions about your case, contact your passport office.</p>
+  <p>Sources: dgip.gov.pk</p>
+</footer>
+
+<div class="tooltip" id="tooltip" role="tooltip"></div>
+<script src="/app.js" type="module"></script>
+</body>
+</html>

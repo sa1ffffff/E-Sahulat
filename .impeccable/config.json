@@ -1,0 +1,80 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "skipped-heading",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/assigned.html"
+        ],
+        "createdAt": "2026-10-24T21:48:26.703Z",
+        "reason": "Claude: throwaway decision-round sketch, not shipped"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/model-pick.html"
+        ],
+        "createdAt": "2026-10-24T21:48:27.028Z",
+        "reason": "Claude: throwaway decision-round sketch, not shipped; build uses cool photocopy white #f3f3f0"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/challenger-lexicon.html"
+        ],
+        "createdAt": "2026-10-24T21:48:27.320Z",
+        "reason": "Claude: decision sketch rendering the catalog world's own cream stock"
+      },
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "web/index.html"
+        ],
+        "createdAt": "2026-10-24T21:48:27.655Z",
+        "reason": "Claude: indeterminate progress bar shown only while the pipeline boots; a real loading state"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/assigned.html"
+        ],
+        "createdAt": "2026-10-24T22:08:30.994Z",
+        "reason": "Claude: throwaway decision-round sketch of an unchosen or pre-build direction, not shipped"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/model-pick.html"
+        ],
+        "createdAt": "2026-10-24T22:08:31.292Z",
+        "reason": "Claude: throwaway decision-round sketch of an unchosen or pre-build direction, not shipped"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/challenger-lexicon.html"
+        ],
+        "createdAt": "2026-10-24T22:08:31.572Z",
+        "reason": "Claude: throwaway decision-round sketch of an unchosen or pre-build direction, not shipped"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/canon.html"
+        ],
+        "createdAt": "2026-10-24T22:08:31.859Z",
+        "reason": "Claude: throwaway decision-round sketch of an unchosen or pre-build direction, not shipped"
+      }
+    ]
+  }
+}
