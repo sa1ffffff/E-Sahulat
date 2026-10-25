@@ -22,7 +22,7 @@ The first `pip` line installs the CPU-only build of PyTorch, which is much small
 ## Every time you use it
 
 ```bash
-cd "C:\Users\losta\AppData\Local\Claude-Data\claude_pzs8sxrjxfjjc\scratch-workspaces\da320b94-1d1e-4fd8-a6eb-e107f6c84923\26eeb1eb-d117-4760-9220-7efaa3db8770\scratch-2026-10-24-891a7b\E-Sahulat"
+cd E-Sahulat
 .venv\Scripts\activate
 python server.py
 ```
