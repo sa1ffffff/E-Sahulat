@@ -1,6 +1,8 @@
 # Running E-Sahulat on your own computer
 
-These steps use Windows (PowerShell or Command Prompt). You need Python 3.10 or newer and Git.
+These steps use Windows (PowerShell or Command Prompt). You need Python 3.10 to 3.13 and Git. Python 3.14 does not work yet: the pinned Streamlit needs Pillow 10, which has no Windows build for 3.14, so `pip install` fails with a zlib error. If you only have 3.14, install 3.13 first (for example `uv venv --python 3.13 .venv`, or the installer from python.org).
+
+If the project folder has a very long path, pip can fail with "Failed to persist temporary file". Create the environment in a short path such as `C:\esv` instead (`python -m venv C:\esv`), and use `C:\esv\Scripts\activate` in place of `.venv\Scripts\activate` below.
 
 ## One-time setup
 
@@ -20,7 +22,7 @@ The first `pip` line installs the CPU-only build of PyTorch, which is much small
 ## Every time you use it
 
 ```bash
-cd E-Sahulat
+cd "C:\Users\losta\AppData\Local\Claude-Data\claude_pzs8sxrjxfjjc\scratch-workspaces\da320b94-1d1e-4fd8-a6eb-e107f6c84923\26eeb1eb-d117-4760-9220-7efaa3db8770\scratch-2026-10-24-891a7b\E-Sahulat"
 .venv\Scripts\activate
 python server.py
 ```
