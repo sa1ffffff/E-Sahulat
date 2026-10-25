@@ -8,10 +8,11 @@ import time
 from pathlib import Path
 
 import requests
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from starlette.concurrency import iterate_in_threadpool
 
 import llm
 
@@ -44,8 +45,13 @@ def load_pipeline():
 def watch_llm():
     """Probe Ollama off the request path so the status poll stays fast."""
     while True:
-        state["llm"] = llm.state()
+        refresh_llm()
         time.sleep(30)
+
+
+def refresh_llm():
+    state["llm_installed"] = llm.installed() or []
+    state["llm"] = llm.state()
 
 
 def pipeline():
@@ -74,6 +80,7 @@ class Ask(BaseModel):
 class LlmRequest(BaseModel):
     query: str
     response: dict
+    model: str = llm.DEFAULT
 
 
 @app.get("/api/status")
@@ -87,14 +94,49 @@ def status():
 
 
 def llm_info():
-    return {"available": state["llm"] == "ready", "state": state["llm"], "model": llm.MODEL}
+    return {"available": state["llm"] == "ready", "state": state["llm"], "default": llm.DEFAULT,
+            "models": [{"key": key, "label": m["label"], "name": m["name"], "installed": key in state.get("llm_installed", [])}
+                       for key, m in llm.MODELS.items()]}
 
 
 @app.post("/api/llm/start")
 def llm_start():
     """Start Ollama on this machine when the user switches Qwen on and it isn't running."""
-    state["llm"] = llm.start()
+    llm.start()
+    refresh_llm()
     return llm_info()
+
+
+def respond_as_passport_question(ns, query, lang):
+    """Everyone using this app is asking about a passport, so "I want to renew" means renewing one.
+
+    When a query doesn't name the passport and falls short of the answer threshold, ask again with the word in front.
+    The retry still has to pass the same threshold, so off-topic queries ("hello", cricket) stay refused.
+    """
+    resp = ns["respond"](query, lang=lang)
+    q = ns["analyze"](query)
+    if resp["reason"] != "insufficient_evidence" or "PASSPORT" in q.concepts:
+        return resp
+    retry = ns["respond"](f"{'پاسپورٹ' if q.style == 'ur' else 'passport'} {query}", lang=resp["lang"])
+    if retry["decision"] == "abstain":
+        return resp
+    retry["query"] = query
+    retry["trace"]["assumed_passport"] = True
+    return retry
+
+
+def related_passages(ns, resp, limit=3):
+    """The answer passage plus retrieved passages on the same topic, so Qwen can write the steps around it.
+
+    Same topic = the topic labels share a word stem ("online renewal" and "renew before expiry")."""
+    answer = next((ev["pid"] for ev in resp["evidence"] if ev["role"] == "answer"), None)
+    if answer is None:
+        return []
+    stems = lambda p: {w[:5] for w in p["label"].split() if len(w) > 2} - {"passp"}
+    first = ns["PASS"][answer]
+    picked = [first] + [p for pid in resp["trace"]["top5"] if pid != answer
+                        and (p := ns["PASS"][pid])["authority"] == "official" and stems(p) & stems(first)]
+    return [{k: p.get(k) for k in ("pid", "title", "url", "text", "text_ur")} for p in picked[:limit]]
 
 
 @app.post("/api/ask")
@@ -103,8 +145,9 @@ def ask(body: Ask):
     query = body.query.strip()[:1000]
     if not query:
         raise HTTPException(422, "Type a question first.")
-    resp = ns["respond"](query, lang=body.lang if body.lang in LANGS else "auto")
+    resp = respond_as_passport_question(ns, query, body.lang if body.lang in LANGS else "auto")
     verified, issues = ns["verify_response"](resp)
+    resp["context"] = related_passages(ns, resp)
     related = ns["MSG"][resp["lang"]]["related"]
     resp["notes"] = [n for n in resp["notes"] if n != related]
     for pid in resp["trace"]["top5"]:
@@ -135,21 +178,32 @@ def metrics():
 
 
 @app.post("/api/llm")
-def llm_answer(body: LlmRequest):
-    """NDJSON stream: {"t": chunk} lines, then {"done": true, "unsupported": [...]} or {"error": "..."}."""
+def llm_answer(body: LlmRequest, request: Request):
+    """NDJSON stream: {"t": chunk} lines, then {"done": true, "unsupported": [...], "unknown_sources": [...]} or {"error": "..."}."""
     resp = body.response
+    if body.model not in llm.MODELS:
+        raise HTTPException(422, f"Unknown model {body.model!r}; use one of {', '.join(llm.MODELS)}.")
 
-    def stream():
+    async def stream():
         text = ""
+        handle = {}
         try:
-            for chunk in llm.stream_answer(body.query, resp):
+            async for chunk in iterate_in_threadpool(llm.stream_answer(body.query, resp, body.model, handle)):
+                if await request.is_disconnected():
+                    return  # the page moved on; the finally below stops Ollama
                 text += chunk
                 yield json.dumps({"t": chunk}, ensure_ascii=False) + "\n"
-            yield json.dumps({"done": True, "unsupported": llm.unsupported_numbers(text, resp)}) + "\n"
+            yield json.dumps({"done": True, "unsupported": llm.unsupported_numbers(text, resp),
+                              "unknown_sources": llm.unknown_sources(text, resp)}) + "\n"
         except requests.ConnectionError:
             yield json.dumps({"error": f"Ollama isn't reachable at {llm.OLLAMA_URL}"}) + "\n"
         except Exception as exc:
             yield json.dumps({"error": str(exc)}) + "\n"
+        finally:
+            # closing our request is what makes Ollama stop generating
+            handle["cancelled"] = True
+            if response := handle.get("response"):
+                response.close()
 
     return StreamingResponse(stream(), media_type="application/x-ndjson")
 

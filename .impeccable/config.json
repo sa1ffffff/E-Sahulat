@@ -74,6 +74,15 @@
         ],
         "createdAt": "2026-10-24T22:08:31.859Z",
         "reason": "Claude: throwaway decision-round sketch of an unchosen or pre-build direction, not shipped"
+      },
+      {
+        "rule": "pulsing-dot",
+        "value": "*",
+        "files": [
+          "web/index.html"
+        ],
+        "createdAt": "2026-10-25T12:27:53.735Z",
+        "reason": "Claude: the .dots typing indicator animates only while Qwen is generating a reply and is replaced by the text; a genuine in-progress state"
       }
     ]
   }

@@ -46,7 +46,7 @@ async function api(path, options) {
 }
 
 /* ---------------- Status ---------------- */
-const status = { ready: false, llm: { available: false, state: "checking", model: "qwen2.5:3b" } };
+const status = { ready: false, llm: { available: false, state: "checking", default: "3b", models: [] } };
 async function pollStatus() {
   try {
     const s = await (await api("/api/status")).json();
@@ -59,7 +59,7 @@ async function pollStatus() {
 }
 function onReady() {
   $("#boot-banner").hidden = true;
-  $("#pulse").className = "pulse ready";
+  $("#status-dot").className = "status-dot ready";
   $("#status-label").textContent = `${status.passages} passages · runs locally`;
   $("#ask-btn").disabled = false;
   setLlm(status.llm);
@@ -84,21 +84,49 @@ async function refreshLlm() {
 }
 
 /* ---------------- Qwen switch ---------------- */
-const LLM_STATE = { ready: null, starting: "starting…", offline: "offline", missing_model: "model missing", checking: "checking" };
+const LLM_STATE = { starting: "starting…", offline: "offline", missing_model: "model missing", checking: "checking" };
+const SIZE_HINT = { "3b": "Faster. Good for English.", "4b": "Slower, but writes proper Urdu and Roman Urdu." };
 function setLlm(info) {
   status.llm = info;
   const st = info.state ?? (info.available ? "ready" : "offline");
   const chip = $("#llm-state");
   chip.dataset.state = st;
-  chip.textContent = LLM_STATE[st] ?? info.model;
-  if (st === "ready") chip.textContent = info.model;
+  chip.textContent = LLM_STATE[st] ?? "";
+  chip.hidden = st === "ready";
   $("#llm-switch").title = {
-    ready: `${info.model} adds a short summary written only from the quoted text. Switch off for quotes only.`,
+    ready: "Turns the official text into step-by-step answers in your language. Switch off for the official wording only.",
     starting: "Starting Ollama on this machine…",
     offline: "Qwen runs through Ollama. Switching this on starts Ollama if it's installed.",
-    missing_model: `Ollama is running but the model isn't downloaded. Run: ollama pull ${info.model}`,
+    missing_model: `Ollama is running but no Qwen model is downloaded. Run: ollama pull ${info.models.at(0)?.name ?? "qwen2.5:3b"}`,
   }[st] ?? "";
+  for (const b of $("#llm-size").querySelectorAll("button")) {
+    const m = info.models.find((x) => x.key === b.dataset.model);
+    b.disabled = !m?.installed;
+    b.title = m?.installed ? `${m.label}: ${SIZE_HINT[m.key]}` : `${m?.label ?? b.textContent} isn't downloaded. Run: ollama pull ${m?.name}`;
+  }
+  showSize();
 }
+
+// The chosen size, falling back to whichever model is downloaded.
+function llmModel() {
+  const installed = status.llm.models.filter((m) => m.installed).map((m) => m.key);
+  const want = prefs.get("qwenModel", status.llm.default);
+  return installed.includes(want) ? want : installed[0] ?? want;
+}
+const modelLabel = (key) => status.llm.models.find((m) => m.key === key)?.label ?? `Qwen ${key.toUpperCase()}`;
+function showSize() {
+  const key = llmModel();
+  $("#llm-size").querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.model === key)));
+}
+function setModel(key) {
+  prefs.set("qwenModel", key);
+  showSize();
+  applySummary();
+}
+$("#llm-size").addEventListener("click", (e) => {
+  const b = e.target.closest("button");
+  if (b && !b.disabled && b.dataset.model !== llmModel()) setModel(b.dataset.model);
+});
 $("#use-llm").addEventListener("change", async (e) => {
   const sw = e.target;
   if (sw.checked && !status.llm.available) {
@@ -118,17 +146,13 @@ $("#use-llm").addEventListener("change", async (e) => {
 });
 const qwenOn = () => $("#use-llm").checked && status.llm.available;
 
-// Add or remove the summary on the answer already on screen, so the switch acts immediately.
+// Redraw the answer on screen, so the switch acts immediately.
 function applySummary() {
   const entry = history.find((e) => e.id === activeId);
-  const doc = $("#result .document");
-  if (!entry || !doc) return;
-  doc.querySelector(".summary")?.remove();
-  const { response: r, verified } = entry.data;
-  if (qwenOn() && r.decision === "answer" && verified) doc.querySelector(".doc-message").after(summaryBlock(entry));
+  if (entry && $("#result .document")) showEntry(entry);
 }
 function onBootError(message) {
-  $("#pulse").className = "pulse failed";
+  $("#status-dot").className = "status-dot failed";
   $("#status-label").textContent = "Pipeline failed to load";
   const banner = $("#boot-banner");
   banner.hidden = false;
@@ -228,46 +252,30 @@ for (const q of EXAMPLES) {
 }
 
 function showEntry(entry, fresh = false) {
+  llmStream?.abort();
   activeId = entry.id;
   const { response: r, verified, issues } = entry.data;
   const decision = r.decision === "answer" && !verified ? "abstain" : r.decision;
   const ur = r.lang === "ur";
-  const answerCode = r.evidence.find((e) => e.role === "answer")?.pid;
+  const answer = r.evidence.find((e) => e.role === "answer");
 
   const stampTitle = r.decision === "answer" && !verified ? "Copy not verified" : STAMP[decision].title;
-  const stampSub = decision === "answer" ? [`${answerCode ?? ""} · quoted from dgip.gov.pk`, `Checked ${today}`] : [reasonText(r.reason)];
+  const stampSub = decision === "answer" ? [`${answer?.pid ?? ""} · quoted from dgip.gov.pk`, `Checked ${today}`] : [reasonText(r.reason)];
   const stamp = h("div", { class: `stamp ${fresh ? "land" : ""}`, "data-decision": decision, role: "img", "aria-label": `${stampTitle}. ${stampSub.join(". ")}` },
     h("div", { class: "stamp-inner" }, h("b", {}, stampTitle), stampSub.map((line) => h("small", {}, line))));
 
   const doc = h("article", { class: `document ${fresh ? "enter" : ""}`, "data-decision": decision, "aria-label": "Answer" },
     h("div", { class: "doc-head" },
-      h("div", {},
-        h("h2", { class: `doc-query ${URDU.test(r.query) ? "ur" : ""}`, lang: URDU.test(r.query) ? "ur" : null }, r.query),
-        h("div", { class: "doc-meta" },
-          h("span", {}, reasonText(r.reason)),
-          h("span", {}, { en: "English", ur: "Urdu", roman_ur: "Roman Urdu" }[r.lang] ?? r.lang),
-          h("span", {}, `${Math.max(1, Math.round(r.latency_ms))} ms`))),
+      h("p", { class: "doc-label" }, "You asked"),
+      h("h2", { class: `doc-query ${URDU.test(r.query) ? "ur" : ""}`, lang: URDU.test(r.query) ? "ur" : null }, r.query),
+      h("div", { class: "doc-meta" },
+        h("span", {}, reasonText(r.reason)),
+        r.trace.assumed_passport ? h("span", {}, "Read as a passport question") : null,
+        h("span", {}, { en: "English", ur: "Urdu", roman_ur: "Roman Urdu" }[r.lang] ?? r.lang)),
       stamp),
-    text(r.message, "doc-message"));
+    answerBlock(entry, decision));
 
-  if (qwenOn() && r.decision === "answer" && verified && (fresh || entry.summary)) doc.append(summaryBlock(entry));
-
-  if (r.evidence.length) {
-    doc.append(h("div", { class: "evidence" }, r.evidence.map((ev, i) => {
-      const hasUr = Boolean(ev.text_ur);
-      return h("section", { class: "copy", style: `--i:${i}` },
-        ev.role === "context" ? h("p", { class: "copy-context" }, icon("link"), "Related official text. It doesn't answer the specific request.") : null,
-        h("div", { class: `spine ${hasUr ? "" : "single"} ${ur && hasUr ? "urdu-first" : ""}` },
-          h("div", { class: "quote", lang: "en" }, ev.spans.map((s) => h("q", {}, s))),
-          h("i", { "aria-hidden": "true" }),
-          hasUr ? h("p", { class: "quote-ur ur", lang: "ur" }, ev.text_ur) : null),
-        h("div", { class: "source" },
-          h("a", { class: "code", href: `#/kb/${ev.pid}`, title: `Open passage ${ev.pid} in the knowledge base` }, ev.pid),
-          h("a", { class: "ext", href: ev.url, target: "_blank", rel: "noopener" }, ev.title.replace(/^DGI&P — /, ""), icon("ext")),
-          h("span", { class: `verified ${verified ? "" : "failed"}` }, icon(verified ? "check" : "alert"),
-            verified ? "Citation verified: quote, URL and numbers match" : `Citation check failed: ${issues.join("; ")}`)));
-    })));
-  }
+  if (r.evidence.length) doc.append(sourcesBlock(r, verified, issues, decision));
   doc.append(h("div", { class: "notes" }, r.notes.map((n) => text(n)),
     text(ur ? "ای سہولت ایک غیر سرکاری یونیورسٹی منصوبہ ہے، یہ DGI&P یا NADRA کی سروس نہیں۔"
       : "E-Sahulat is an unofficial university project, not a DGI&P or NADRA service.")));
@@ -280,22 +288,72 @@ function showEntry(entry, fresh = false) {
   }
 }
 
-function summaryBlock(entry) {
-  const r = entry.data.response;
-  const out = h("p", { class: "summary-text streaming", dir: "auto", lang: r.lang === "ur" ? "ur" : null });
-  if (r.lang === "ur") out.classList.add("ur");
-  const warn = (nums) => h("p", { class: "warn" }, icon("alert"), `The summary contains numbers that aren't in the quotes (${nums.join(", ")}). Trust the quotes below.`);
-  const box = h("div", { class: "summary" },
-    h("div", { class: "doc-label" }, icon("spark"), `Qwen summary · ${status.llm.model}, written only from the quotes below`), out);
-  if (entry.summary) {
-    out.textContent = entry.summary.text;
-    out.classList.remove("streaming");
-    if (entry.summary.unsupported.length) box.append(warn(entry.summary.unsupported));
+// The one thing the reader came for: Qwen's steps, else the official sentence in their language, else the reason.
+function answerBlock(entry, decision) {
+  const { response: r, verified } = entry.data;
+  const ur = r.lang === "ur";
+  const answer = r.evidence.find((e) => e.role === "answer");
+  const box = h("section", { class: "answer" });
+  if (decision !== "answer") {
+    box.append(text(r.decision === "answer" ? "The official text found for this couldn't be verified against its page, so it isn't given as an answer." : r.message, "answer-message"));
     return box;
   }
+  const official = ur && answer.text_ur ? answer.text_ur : answer.spans.join(" ");
+  const quote = h("blockquote", { class: `answer-quote ${URDU.test(official) ? "ur" : ""}`, lang: URDU.test(official) ? "ur" : "en" }, official);
+  box.append(
+    h("p", { class: "answer-label" }, qwenOn() ? `Answer, step by step · ${modelLabel(llmModel())}` : "Official answer"),
+    qwenOn() ? stepsBlock(entry, quote) : quote,
+    h("p", { class: "answer-proof" },
+      h("a", { class: "code", href: `#/kb/${answer.pid}`, title: `Open passage ${answer.pid} in the knowledge base` }, answer.pid),
+      h("a", { class: "ext", href: answer.url, target: "_blank", rel: "noopener" }, answer.title.replace(/^DGI&P — /, ""), icon("ext")),
+      h("span", { class: "verified" }, icon("check"), "Citation verified")));
+  return box;
+}
+
+let llmStream = null;
+
+// Qwen's reply as a numbered list. Until its first words arrive, the verified quote holds the place.
+function stepsBlock(entry, quote) {
+  const r = entry.data.response;
+  const ur = r.lang === "ur";
+  const model = llmModel();
+  const out = h("div", { class: `steps ${ur ? "ur" : ""}`, dir: ur ? "rtl" : "ltr", lang: ur ? "ur" : null, "aria-live": "polite" });
+  const wait = h("p", { class: "steps-wait" }, h("span", { class: "dots", "aria-hidden": "true" }, h("i"), h("i"), h("i")),
+    `${modelLabel(model)} is writing the steps from the official text`);
+  const box = h("div", { class: "steps-box" });
+  // 3B's Urdu and Roman Urdu are unreliable; point to 4B when it's downloaded
+  const has4b = status.llm.models.some((m) => m.key === "4b" && m.installed);
+  const hint = model === "3b" && r.lang !== "en" && has4b
+    ? h("p", { class: "size-hint" }, "Qwen 3B writes weak Urdu and Roman Urdu. ",
+      h("button", { type: "button", class: "link-btn", onclick: () => setModel("4b") }, "Rewrite with Qwen 4B"))
+    : null;
+  box.append(quote, wait, hint ?? "");
+  // the server checks the finished text: numbers must appear in the passages, and cited ids must be ones it was given
+  const warn = ({ unsupported = [], unknown_sources: unknown = [] }) => [
+    unsupported.length ? h("p", { class: "warn" }, icon("alert"),
+      `These steps mention numbers that aren't in the official text (${unsupported.join(", ")}). Check them against the source below.`) : null,
+    unknown.length ? h("p", { class: "warn" }, icon("alert"),
+      `These steps cite ${unknown.join(", ")}, which wasn't among the official text retrieved for this question. Treat that step with care.`) : null,
+  ];
+  const show = (t, done) => {
+    if (!t.trim()) return;
+    if (!out.isConnected) box.replaceChildren(out, hint ?? "");
+    out.replaceChildren(...formatSteps(t));
+    out.classList.toggle("streaming", !done);
+  };
+  entry.summaries ??= {};
+  const cached = entry.summaries[model];
+  if (cached) {
+    show(cached.text, true);
+    box.append(...warn(cached).filter(Boolean));
+    return box;
+  }
+  // one generation at a time (showEntry cancels the last): a laptop CPU can't run two models side by side
+  const stream = llmStream = new AbortController();
   (async () => {
+    let written = "";
     try {
-      const res = await api("/api/llm", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ query: r.query, response: r }) });
+      const res = await api("/api/llm", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ query: r.query, response: r, model }), signal: stream.signal });
       const reader = res.body.pipeThrough(new TextDecoderStream()).getReader();
       let buf = "";
       for (;;) {
@@ -306,22 +364,70 @@ function summaryBlock(entry) {
         buf = lines.pop();
         for (const line of lines.filter(Boolean)) {
           const msg = JSON.parse(line);
-          if (msg.t) out.textContent += msg.t;
           if (msg.error) throw new Error(msg.error);
+          if (msg.t) { written += msg.t; show(written, false); }
           if (msg.done) {
-            if (msg.unsupported.length) box.append(warn(msg.unsupported));
-            entry.summary = { text: out.textContent, unsupported: msg.unsupported };
+            show(written, true);
+            box.append(...warn(msg).filter(Boolean));
+
+            entry.summaries[model] = { text: written, unsupported: msg.unsupported, unknown_sources: msg.unknown_sources };
+
             store.set("file", history);
           }
         }
       }
     } catch (err) {
-      out.textContent = `The local model couldn't write a summary (${err.message}). The verified quotes below are unaffected.`;
-    } finally {
+      if (err.name === "AbortError") return;
       out.classList.remove("streaming");
+      wait.replaceChildren(icon("alert"), `The local model couldn't finish the steps (${err.message}). The official wording on this page still stands.`);
+      wait.classList.add("failed");
+      if (out.isConnected) box.append(wait);
     }
   })();
   return box;
+}
+
+// "1. Do this [F17]" lines become an ordered list, other lines paragraphs, passage ids links to the knowledge base.
+function formatSteps(t) {
+  const STEP = /^\s*[\d۰-۹٠-٩]+[.)۔]\s*/;
+  const inline = (s) => s.split(/(\[F\d+\])/).filter(Boolean).map((part) => {
+    const id = part.match(/^\[(F\d+)\]$/)?.[1];
+    return id ? h("a", { class: "cite", href: `#/kb/${id}`, title: `Source: passage ${id}` }, id) : part.replace(/\*\*/g, "");
+  });
+  const blocks = [];
+  let list = null;
+  for (const line of t.split("\n").map((l) => l.trim()).filter(Boolean)) {
+    if (STEP.test(line)) {
+      if (!list) blocks.push(list = h("ol"));
+      list.append(h("li", {}, inline(line.replace(STEP, ""))));
+    } else {
+      list = null;
+      blocks.push(h("p", {}, inline(line.replace(/^[-*•]\s*/, ""))));
+    }
+  }
+  return blocks;
+}
+
+// The official wording behind the answer, in both languages, folded away so it backs the answer up without competing.
+function sourcesBlock(r, verified, issues, decision) {
+  const ur = r.lang === "ur";
+  const context = r.evidence.some((e) => e.role === "context");
+  return h("details", { class: "sources", open: context || !verified || null },
+    h("summary", {}, icon("chev"), context ? "Related official text" : "Official wording, in English and Urdu"),
+    h("div", { class: "evidence" }, r.evidence.map((ev, i) => {
+      const hasUr = Boolean(ev.text_ur);
+      return h("section", { class: "copy", style: `--i:${i}` },
+        ev.role === "context" ? h("p", { class: "copy-context" }, icon("link"), "Related official text. It doesn't answer the specific request.") : null,
+        h("div", { class: `spine ${hasUr ? "" : "single"} ${ur && hasUr ? "urdu-first" : ""}` },
+          h("div", { class: "quote", lang: "en" }, ev.spans.map((s) => h("q", {}, s))),
+          h("i", { "aria-hidden": "true" }),
+          hasUr ? h("p", { class: "quote-ur ur", lang: "ur" }, ev.text_ur) : null),
+        h("div", { class: "source" },
+          h("a", { class: "code", href: `#/kb/${ev.pid}`, title: `Open passage ${ev.pid} in the knowledge base` }, ev.pid),
+          h("a", { class: "ext", href: ev.url, target: "_blank", rel: "noopener" }, ev.title.replace(/^DGI&P — /, ""), icon("ext")),
+          decision === "answer" || !verified ? h("span", { class: `verified ${verified ? "" : "failed"}` }, icon(verified ? "check" : "alert"),
+            verified ? "Quote, URL and numbers match the official page" : `Citation check failed: ${issues.join("; ")}`) : null));
+    })));
 }
 
 function traceBlock(t, latency) {

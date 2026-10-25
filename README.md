@@ -14,9 +14,16 @@ The web app (`server.py` + `web/`) has three sections: **Ask** (each answer is s
 
 Run the notebook once before the app; it writes `esahulat/outputs/app_metrics.json`, which the Evaluation section reads (it falls back to `results/app_metrics.json`). The older Streamlit front end still works with `streamlit run app.py`.
 
-### Optional: local LLM answer
+### Optional: step-by-step answers from a local LLM
 
-With [Ollama](https://ollama.com) running and `ollama pull qwen2.5:3b` done, the Ask page adds a short plain-language answer above the quotes (sidebar toggle). It only runs when the pipeline has already decided to answer and the citation verified, it sees only the quoted spans, and any number it writes that isn't in the quotes is flagged. Set `ESAHULAT_LLM` to use another Ollama model, `OLLAMA_URL` for a non-default host.
+With [Ollama](https://ollama.com) running, the "Step-by-step (Qwen)" switch turns the answer into a direct sentence plus numbered steps, written in the question's language (English, Urdu or Roman Urdu). A 3B / 4B toggle beside it picks the model:
+
+- **3B** (`ollama pull qwen2.5:3b`, the default): faster, good for English, but its Urdu and Roman Urdu are unreliable. On a non-English answer it offers a one-click rewrite with 4B.
+- **4B** (`ollama pull qwen3:4b-instruct-2507-q4_K_M`): slower, and writes proper Urdu and Roman Urdu. Use the instruct build: the plain `qwen3:4b` tag is the thinking release, which reasons for minutes before answering.
+
+Only one model stays in memory: switching unloads the other and cancels any answer still being written. Qwen only runs once the pipeline has decided to answer, it sees only the answer passage and retrieved passages on the same topic, and the server flags any number that isn't in those passages and any passage id it wasn't given. Set `ESAHULAT_LLM_3B` / `ESAHULAT_LLM_4B` to swap in other Ollama models, `OLLAMA_URL` for a non-default host.
+
+Everyone using the app is asking about a passport, so a question that doesn't say so ("I want to renew") is asked again with "passport" added when it falls short of the answer threshold. The retry has to pass the same threshold, so off-topic questions are still refused.
 
 ## Files
 

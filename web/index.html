@@ -34,7 +34,7 @@
       <a class="tab" href="#/eval" data-view="eval">Evaluation</a>
       <span class="tab-indicator" aria-hidden="true"></span>
     </nav>
-    <div class="cover-status" role="status" aria-live="polite"><span class="pulse" id="pulse"></span><span class="label" id="status-label">Loading pipeline</span></div>
+    <div class="cover-status" role="status" aria-live="polite"><span class="status-dot" id="status-dot"></span><span class="label" id="status-label">Loading pipeline</span></div>
   </div>
 </header>
 
@@ -68,9 +68,13 @@
               <button type="button" data-lang="roman_ur" aria-pressed="false">Roman Urdu</button>
             </div>
             <label class="switch" id="llm-switch">
-              <input type="checkbox" id="use-llm" role="switch" aria-describedby="llm-state" disabled> <span>Qwen summary</span>
+              <input type="checkbox" id="use-llm" role="switch" aria-describedby="llm-state" disabled> <span>Step-by-step (Qwen)</span>
               <span class="llm-state" id="llm-state" data-state="checking">checking</span>
             </label>
+            <div class="segmented llm-size" role="group" aria-label="Qwen model size" id="llm-size">
+              <button type="button" data-model="3b" aria-pressed="true" disabled>3B</button>
+              <button type="button" data-model="4b" aria-pressed="false" disabled>4B</button>
+            </div>
             <span class="kbd">Enter to ask · Shift+Enter for a new line</span>
             <button class="btn btn-primary" type="submit" id="ask-btn" disabled>Ask <svg class="icon"><use href="#i-arrow"/></svg></button>
           </div>

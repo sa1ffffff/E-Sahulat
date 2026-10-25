@@ -33,15 +33,26 @@ Then open http://127.0.0.1:8000 in your browser.
 - Press `Ctrl+C` in the terminal to stop the server.
 - To use another port: `set PORT=8080` (Command Prompt) or `$env:PORT=8080` (PowerShell) before `python server.py`.
 
-## Qwen summary (optional)
+## Step-by-step answers with Qwen (optional)
 
-The "Qwen summary" switch in the Ask composer adds a short plain-language summary written only from the verified quotes. It needs [Ollama](https://ollama.com) and the Qwen2.5 3B model:
+The "Step-by-step (Qwen)" switch in the Ask composer turns each answer into a direct sentence plus numbered steps, in the language of the question, written only from the official text. It needs [Ollama](https://ollama.com) and one or both Qwen models:
 
 ```bash
 ollama pull qwen2.5:3b
 ```
 
-If Ollama is installed but not running, switching Qwen on in the app starts it for you. The tag beside the switch shows its state: `qwen2.5:3b` (ready), `starting…`, `offline` or `model missing`. The first summary after start-up takes about 25 seconds while the model loads; later ones take about 8–17 seconds on a laptop CPU.
+```bash
+ollama pull qwen3:4b-instruct-2507-q4_K_M
+```
+
+The 3B / 4B toggle beside the switch picks between them, and the app remembers your choice:
+
+- **3B** (about 1.9 GB) is faster and fine for English questions. Its Urdu and Roman Urdu are poor, so on those answers it offers "Rewrite with Qwen 4B".
+- **4B** (about 2.5 GB) is slower but writes proper Urdu and Roman Urdu. Pull that exact tag: plain `qwen3:4b` is the "thinking" release, which reasons for minutes before it answers.
+
+A size you haven't downloaded is greyed out. Only one model is kept in memory, so switching size unloads the other and cancels any answer still being written.
+
+If Ollama is installed but not running, switching Qwen on in the app starts it for you. A tag beside the switch shows `starting…`, `offline` or `model missing` when Qwen isn't ready. The official sentence shows straight away and the steps replace it as they arrive. On a laptop CPU, 3B takes about 40–70 seconds for a full answer; 4B takes about 1 minute in English or Roman Urdu and about 2 minutes in Urdu. Switching size adds a few seconds to load the other model.
 
 ## Evaluation numbers
 
@@ -71,7 +82,7 @@ tectonic technical_report.tex
 |---|---|
 | `python` is not recognized | Install Python from python.org and tick "Add Python to PATH". |
 | Page stays on "Loading pipeline" | Watch the terminal; the first run is downloading e5. Check your internet connection. |
-| Qwen tag says `model missing` | Run `ollama pull qwen2.5:3b`. |
+| Qwen tag says `model missing`, or 3B / 4B is greyed out | Run `ollama pull qwen2.5:3b` and/or `ollama pull qwen3:4b-instruct-2507-q4_K_M`. |
 | Qwen tag says `offline` | Install Ollama, or start it with `ollama serve`. |
 | Out-of-memory error | Close other heavy programs. e5 and Qwen together need several GB of RAM. |
 
